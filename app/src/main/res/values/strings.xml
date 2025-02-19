@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">maMeal</string>
+    <string name="onboardingWelcome">Get\nCooking</string>
+    <string name="onboardingdesc">Simple way to find Tasty Recipe</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="loginHeader">Login to your account.</string>
+    <string name="loginsubheader">"Please sign in to your account "</string>
+    <string name="forgetPasswrod">Forget passwrod?</string>
+    <string name="email">Email Address</string>
+    <string name="password">Password</string>
+    <string name="emailHint"></string>
+    <string name="passwordHint"></string>
+    <string name="signinBtn">Sign in</string>
+    <string name="optionalSigninDivider">Or sign in with</string>
+    <string name="toRegister">Don\'t have an account? </string>
+    <string name="register">Register</string>
+    <string name="create_your_new_account">Create your new account</string>
+    <string name="create_new_account_desc">Create an account to start looking for the food you like</string>
+    <string name="email_address">Email Address</string>
+    <string name="username">Username</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="sign_up">Sign up</string>
+    <string name="enter_as_guest">Enter as guest</string>
+</resources>
