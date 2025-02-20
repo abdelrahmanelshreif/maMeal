@@ -24,4 +24,6 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="sign_up">Sign up</string>
     <string name="enter_as_guest">Enter as guest</string>
+    <string name="hello_dear">Hello Dear</string>
+    <string name="what_are_you_cooking_today">What are you cooking today?</string>
 </resources>
