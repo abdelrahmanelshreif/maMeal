@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mameal.R;
 import com.example.mameal.authentication.presenter.LoginPresenter;
+import com.example.mameal.network.FirebaseServicesImpl;
 import com.example.mameal.utils.Utility;
 
 public class LoginFragment extends Fragment implements LoginView {
@@ -46,6 +47,7 @@ public class LoginFragment extends Fragment implements LoginView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setupUiComponent(view);
+        loginPresenter = new LoginPresenter(this, new FirebaseServicesImpl());
 
         signin_btn.setOnClickListener(v -> {
             loginUser();
@@ -66,7 +68,6 @@ public class LoginFragment extends Fragment implements LoginView {
     private void loginUser() {
         String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
-
         loginPresenter.loginUser(email, password);
     }
 
@@ -89,6 +90,6 @@ public class LoginFragment extends Fragment implements LoginView {
 
     @Override
     public void showLoginError(String errorMessage) {
-        Utility.showToast(getContext(), "Login Failed");
+        Utility.showToast(getContext(), errorMessage);
     }
 }

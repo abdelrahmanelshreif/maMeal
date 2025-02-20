@@ -11,6 +11,12 @@ public class LoginPresenter implements AuthenticationCallback {
     private LoginView loginView;
     private FirebaseServices firebaseServices;
 
+    public LoginPresenter(LoginView loginView, FirebaseServices firebaseServices) {
+        this.loginView = loginView;
+        this.firebaseServices = firebaseServices;
+    }
+
+
     public void loginUser(String email, String password) {
 
         boolean isValidData = validateData(email, password);
