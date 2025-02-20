@@ -1,4 +1,4 @@
-package com.example.mameal;
+package com.example.mameal.utils;
 
 import static android.widget.Toast.LENGTH_SHORT;
 

@@ -1,7 +1,6 @@
 package com.example.mameal.authentication.view;
 
 import android.os.Bundle;
-import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,13 +14,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.mameal.R;
-import com.example.mameal.Utility;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.mameal.authentication.presenter.LoginPresenter;
+import com.example.mameal.utils.Utility;
 
-public class LoginFragment extends Fragment {
+public class LoginFragment extends Fragment implements LoginView {
 
     TextView register_Btn, forget_password_btn;
 
@@ -29,6 +25,8 @@ public class LoginFragment extends Fragment {
 
     EditText emailEditText, passwordEditText;
     Button signin_btn;
+
+    LoginPresenter loginPresenter;
 
 
     public LoginFragment() {
@@ -40,8 +38,7 @@ public class LoginFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_login, container, false);
     }
 
@@ -70,39 +67,28 @@ public class LoginFragment extends Fragment {
         String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
 
-        boolean isValidated = validateData(email, password);
-
-        if (!isValidated) {
-            return;
-        }
-        loginInFirebase(email, password);
+        loginPresenter.loginUser(email, password);
     }
 
-    private boolean validateData(String email, String password) {
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            emailEditText.setError("Email is Invalid");
-            return false;
-        } else {
-            if (password.length() < 6) {
-                passwordEditText.setError("Password length invalid");
-                return false;
-            }
-        }
-        return true;
+
+    @Override
+    public void invalidEmailLoginData() {
+        emailEditText.setError("Email is Invalid");
     }
 
-    private void loginInFirebase(String email, String password) {
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    Utility.showToast(getContext(), "Successful Login");
-                } else {
-                    Utility.showToast(getContext(), "Login Failed");
-                }
-            }
-        });
+    @Override
+    public void invalidPasswordLoginData() {
+        passwordEditText.setError("Password length invalid");
 
+    }
+
+    @Override
+    public void showLoginSuccess() {
+        Utility.showToast(getContext(), "Successful Login");
+    }
+
+    @Override
+    public void showLoginError(String errorMessage) {
+        Utility.showToast(getContext(), "Login Failed");
     }
 }
