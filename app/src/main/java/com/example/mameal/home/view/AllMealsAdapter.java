@@ -47,7 +47,7 @@ public class AllMealsAdapter extends RecyclerView.Adapter<AllMealsAdapter.ViewHo
         holder.mealCategory.setText(meal.getMealCategory());
         Glide.with(context)
                 .load(meal.getMealImgSource())
-                .apply(new RequestOptions().override(300, 200))
+                .apply(new RequestOptions().override(600, 100))
                 .placeholder(R.drawable.default_menu_image_placeholder)
                 .error(R.drawable.default_menu_image_placeholder)
                 .into(holder.mealImage);
