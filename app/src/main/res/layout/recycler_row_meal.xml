@@ -17,12 +17,12 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/mealCategoryCardTextViewCard"
+
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imageView6"
+                android:id="@+id/mealCardImgView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -42,8 +42,8 @@
                 android:text="Meal Title"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/imageView6"
-                app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+                app:layout_constraintStart_toStartOf="@+id/mealCardImgView"
+                app:layout_constraintTop_toBottomOf="@+id/mealCardImgView" />
 
             <ImageView
                 android:id="@+id/mealAddToFavBtn"
@@ -53,9 +53,9 @@
                 android:layout_marginTop="47dp"
                 android:layout_marginEnd="4dp"
                 android:background="@drawable/add_to_favorites_icon"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView6"
+                app:layout_constraintBottom_toBottomOf="@+id/mealCardImgView"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/imageView6"
+                app:layout_constraintTop_toTopOf="@+id/mealCardImgView"
                 app:layout_constraintVertical_bias="0.968" />
 
             <TextView
@@ -71,7 +71,7 @@
                 android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/imageView6"
+                app:layout_constraintStart_toStartOf="@+id/mealCardImgView"
                 app:layout_constraintTop_toBottomOf="@+id/mealTitleCardTextViewCard" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

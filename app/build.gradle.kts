@@ -37,6 +37,9 @@ android {
 
 dependencies {
     implementation (libs.retrofit)
+    implementation (libs.adapter.rxjava3)
+    implementation (libs.rxjava)
+    implementation (libs.rxandroid)
     implementation (libs.converter.gson)
     implementation (libs.gson)
     implementation (libs.glide)

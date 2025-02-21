@@ -1,5 +1,6 @@
 package com.example.mameal;
 
+import android.database.Observable;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -10,6 +11,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.mameal.authentication.view.LoginFragment;
 import com.example.mameal.authentication.view.RegisterFragment;
+import com.example.mameal.home.view.HomeFragment;
 import com.example.mameal.model.MaMealRepository;
 import com.example.mameal.model.Meal;
 import com.example.mameal.network.MaMealRemoteDataSource;
@@ -27,14 +29,14 @@ public class MainActivity extends AppCompatActivity implements NetworkCallback {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragmentContainerView, new LoginFragment());
+        fragmentTransaction.add(R.id.fragmentContainerView, new HomeFragment());
         fragmentTransaction.commit();
 
         MaMealRepository.getInstance(new MaMealRemoteDataSource()).getAllMealsData(this);
     }
 
     @Override
-    public void onSuccessResult(List<Meal> meals) {
+    public void onSuccessResult(Observable<List<Meal>> meals) {
         Log.i("TAG", "onSuccessResult: "+meals);
     }
 

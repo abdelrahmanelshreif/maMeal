@@ -139,44 +139,45 @@
         android:id="@+id/divider2"
         android:layout_width="0dp"
         android:layout_height="1dp"
-        android:layout_marginTop="580dp"
-        app:layout_constraintEnd_toStartOf="@id/guideline2"
+        android:layout_marginTop="40dp"
 
+        app:layout_constraintEnd_toStartOf="@id/guideline2"
         app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signin_btn"
         app:layout_constraintWidth_percent="0.2" />
 
     <View
         android:id="@+id/divider3"
         android:layout_width="0dp"
         android:layout_height="1dp"
-        android:layout_marginTop="580dp"
-        app:layout_constraintWidth_percent="0.2"
-        app:layout_constraintHorizontal_bias="0.9"
+        android:layout_marginTop="40dp"
         android:background="?android:attr/listDivider"
-        app:layout_constraintStart_toStartOf="@id/guideline"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.927"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/signin_btn"
+        app:layout_constraintWidth_percent="0.2" />
 
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="572dp"
+        android:layout_marginTop="32dp"
         android:gravity="center"
         android:text="@string/optionalSigninDivider"
         android:textColor="@color/grey_4"
         app:layout_constraintEnd_toStartOf="@+id/divider3"
         app:layout_constraintHorizontal_bias="0.527"
         app:layout_constraintStart_toEndOf="@+id/divider2"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/signin_btn" />
 
     <androidx.constraintlayout.widget.Barrier
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
         />
+
 
     <ImageView
         android:id="@+id/google_signin_img_view_btn"
@@ -187,10 +188,11 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.401"
+        app:layout_constraintHorizontal_bias="0.404"
         app:layout_constraintStart_toStartOf="@+id/guideline"
 
         app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:layout_constraintVertical_bias="0.0"
         app:layout_constraintWidth_percent="0.09" />
 
     <ImageView
@@ -202,13 +204,12 @@
         app:layout_constraintBottom_toBottomOf="@+id/google_signin_img_view_btn"
 
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintHorizontal_bias="0.2"
-        app:layout_constraintVertical_bias="1.0"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.147"
         app:layout_constraintStart_toEndOf="@+id/google_signin_img_view_btn"
         app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:layout_constraintVertical_bias="1.0"
         app:layout_constraintWidth_percent="0.09" />
-
 
     <TextView
         android:id="@+id/textView11"
@@ -234,8 +235,10 @@
         app:layout_constraintBottom_toBottomOf="@+id/textView11"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintHeight_percent="0.03"
-        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView11"
+        app:layout_constraintTop_toTopOf="@+id/guideline5"
+        app:layout_constraintVertical_bias="1.0"
         app:layout_constraintWidth_percent="0.2" />
 
     <Button

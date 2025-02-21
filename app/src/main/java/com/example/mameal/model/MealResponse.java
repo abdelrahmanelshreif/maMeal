@@ -1,5 +1,7 @@
 package com.example.mameal.model;
 
+import android.database.Observable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -7,18 +9,18 @@ import java.util.List;
 public class MealResponse {
 
     @SerializedName("meals")
-    private List<Meal> meals;
+    private Observable<List<Meal>> meals;
 
 
-    public MealResponse(List<Meal> meals) {
+    public MealResponse(Observable<List<Meal>> meals) {
         this.meals = meals;
     }
 
-    public List<Meal> getMeals() {
+    public Observable<List<Meal>> getMeals() {
         return meals;
     }
 
-    public void setMeals(List<Meal> meals) {
+    public void setMeals(Observable<List<Meal>>meals) {
         this.meals = meals;
     }
 }
