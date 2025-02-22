@@ -26,4 +26,9 @@
     <string name="enter_as_guest">Enter as guest</string>
     <string name="hello_dear">Hello Dear</string>
     <string name="what_are_you_cooking_today">What are you cooking today?</string>
+    <string name="meal_title">Meal Title</string>
+    <string name="meal_category">Meal Category</string>
+    <string name="recommended_for_today">Recommended for Today</string>
+    <string name="daily_inspiration">Daily Inspiration</string>
+    <string name="a_taste_of_the_season">A Taste of the Season</string>
 </resources>

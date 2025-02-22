@@ -47,11 +47,10 @@ public class AllMealsAdapter extends RecyclerView.Adapter<AllMealsAdapter.ViewHo
         holder.mealCategory.setText(meal.getMealCategory());
         Glide.with(context)
                 .load(meal.getMealImgSource())
-                .apply(new RequestOptions().override(600, 100))
                 .placeholder(R.drawable.default_menu_image_placeholder)
                 .error(R.drawable.default_menu_image_placeholder)
                 .into(holder.mealImage);
-        holder.mealAddToFav.setImageResource(R.drawable.add_to_favorites_icon);
+
     }
 
     @Override
@@ -73,7 +72,7 @@ public class AllMealsAdapter extends RecyclerView.Adapter<AllMealsAdapter.ViewHo
             mealTitle = itemView.findViewById(R.id.mealTitleCardTextViewCard);
             mealCategory = itemView.findViewById(R.id.mealCategoryCardTextView);
             mealImage = itemView.findViewById(R.id.mealCardImgView);
-            mealAddToFav = itemView.findViewById(R.id.mealAddToFavBtn);
+//            mealAddToFav = itemView.findViewById(R.id.mealAddToFavBtn);
 
         }
     }

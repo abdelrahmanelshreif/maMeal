@@ -62,40 +62,25 @@ public class HomeFragment extends Fragment implements HomeView {
     private void setupUiComponent(View view) {
         recyclerView1 = view.findViewById(R.id.homeRecyclerView1);
         recyclerView2 = view.findViewById(R.id.homeRecyclerView2);
-        recyclerView3 = view.findViewById(R.id.homeRecyclerView3);
-        recyclerView4 = view.findViewById(R.id.homeRecyclerView4);
-        recyclerView5 = view.findViewById(R.id.homeRecyclerView5);
-        recyclerView6 = view.findViewById(R.id.homeRecyclerView6);
+//        recyclerView3 = view.findViewById(R.id.homeRecyclerView3);
+
         helloText = view.findViewById(R.id.textView12);
         welcomeText = view.findViewById(R.id.textView13);
-        profileImg = view.findViewById(R.id.imageView3);
+//        profileImg = view.findViewById(R.id.imageView3);
     }
 
     @Override
     public void showMeals(List<MealUiModel> dummyMeals) {
         AllMealsAdapter allMealsAdapter = new AllMealsAdapter(getContext(), dummyMeals);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL,false);
-        LinearLayoutManager layoutManager2 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL,false);
-        LinearLayoutManager layoutManager3 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL,false);
-        LinearLayoutManager layoutManager4 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL,false);
-        LinearLayoutManager layoutManager5 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL,false);
-        LinearLayoutManager layoutManager6 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL,false);
-
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager layoutManager2 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+//
         recyclerView1.setLayoutManager(layoutManager);
         recyclerView2.setLayoutManager(layoutManager2);
-        recyclerView3.setLayoutManager(layoutManager3);
-        recyclerView4.setLayoutManager(layoutManager4);
-        recyclerView5.setLayoutManager(layoutManager5);
-        recyclerView6.setLayoutManager(layoutManager6);
-
+//
+//
         recyclerView1.setAdapter(allMealsAdapter);
         recyclerView2.setAdapter(allMealsAdapter);
-        recyclerView3.setAdapter(allMealsAdapter);
-        recyclerView4.setAdapter(allMealsAdapter);
-        recyclerView5.setAdapter(allMealsAdapter);
-        recyclerView6.setAdapter(allMealsAdapter);
-
-
 
 
     }
