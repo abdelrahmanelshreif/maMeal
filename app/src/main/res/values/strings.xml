@@ -31,4 +31,11 @@
     <string name="recommended_for_today">Recommended for Today</string>
     <string name="daily_inspiration">Daily Inspiration</string>
     <string name="a_taste_of_the_season">A Taste of the Season</string>
+    <string name="home">Home</string>
+    <string name="favourite">Favourite</string>
+    <string name="calender">Calender</string>
+    <string name="profile">Profile</string>
+    <string name="search">Search</string>
+    <string name="section_title">Section Title</string>
+    <string name="saved_recipes">Saved recipes</string>
 </resources>

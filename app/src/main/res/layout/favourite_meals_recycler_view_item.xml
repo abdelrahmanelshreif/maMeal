@@ -10,22 +10,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:cardUseCompatPadding="true"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="12dp"
         android:clickable="true"
         android:focusable="true"
-        app:cardCornerRadius="32dp"
+        app:cardCornerRadius="16dp"
         app:cardElevation="16dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:weightSum="3">
+            android:weightSum="1">
 
             <ImageView
                 android:id="@+id/mealCardImgView"
                 android:layout_width="match_parent"
-                android:layout_height="179dp"
+                android:layout_height="match_parent"
                 android:scaleType="fitXY"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -37,40 +37,47 @@
                 android:id="@+id/mealAddToFavBtn"
                 android:layout_width="30dp"
                 android:layout_height="28dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginStart="313dp"
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/mealTitleCardTextViewCard"
+                app:layout_constraintTop_toTopOf="@+id/mealTitleCardTextViewCard"
                 app:srcCompat="@drawable/add_to_fav" />
 
             <TextView
                 android:id="@+id/mealTitleCardTextViewCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="144dp"
                 android:fontFamily="@font/poppins_black"
-                android:gravity="center"
-                android:lines="2"
+                android:gravity="start"
+                android:lines="1"
+                android:paddingStart="16dp"
+                android:textColor="@color/white"
                 android:text="@string/meal_title"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mealCardImgView" />
+                app:layout_constraintTop_toTopOf="@+id/mealCardImgView" />
 
             <TextView
                 android:id="@+id/mealCategoryCardTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
-                android:gravity="center"
+                android:gravity="start"
                 android:lines="2"
+                android:paddingStart="16dp"
                 android:text="@string/meal_category"
-                android:textColor="@color/grey_2"
+                android:textColor="@color/white"
                 android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mealTitleCardTextViewCard" />
+                app:layout_constraintTop_toBottomOf="@+id/mealTitleCardTextViewCard"
+                app:layout_constraintVertical_bias="0.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

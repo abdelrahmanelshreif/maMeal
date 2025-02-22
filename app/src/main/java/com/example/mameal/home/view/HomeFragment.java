@@ -61,7 +61,7 @@ public class HomeFragment extends Fragment implements HomeView {
 
     private void setupUiComponent(View view) {
         recyclerView1 = view.findViewById(R.id.homeRecyclerView1);
-        recyclerView2 = view.findViewById(R.id.homeRecyclerView2);
+//        recyclerView2 = view.findViewById(R.id.recyclerView2);
 //        recyclerView3 = view.findViewById(R.id.homeRecyclerView3);
 
         helloText = view.findViewById(R.id.textView12);
@@ -73,14 +73,14 @@ public class HomeFragment extends Fragment implements HomeView {
     public void showMeals(List<MealUiModel> dummyMeals) {
         AllMealsAdapter allMealsAdapter = new AllMealsAdapter(getContext(), dummyMeals);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        LinearLayoutManager layoutManager2 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+//        LinearLayoutManager layoutManager2 = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
 //
         recyclerView1.setLayoutManager(layoutManager);
-        recyclerView2.setLayoutManager(layoutManager2);
+//        recyclerView2.setLayoutManager(layoutManager2);
 //
 //
         recyclerView1.setAdapter(allMealsAdapter);
-        recyclerView2.setAdapter(allMealsAdapter);
+//        recyclerView2.setAdapter(allMealsAdapter);
 
 
     }

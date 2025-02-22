@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="starting_def_text">8dp</dimen>
+    <dimen name="dist_from_bottom_nav">80dp</dimen>
 </resources>

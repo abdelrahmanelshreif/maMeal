@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/homeFragment">
-
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.mameal.authentication.view.LoginFragment"
@@ -15,8 +14,24 @@
             app:destination="@id/registerFragment" />
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.example.mameal.search.view.CategoryFragment"
+        android:label="fragment_category"
+        tools:layout="@layout/fragment_category" />
+    <fragment
+        android:id="@+id/favouriteMealsFragment"
+        android:name="com.example.mameal.favourite.view.FavouriteMealsFragment"
+        android:label="fragment_favourite_meals"
+        tools:layout="@layout/fragment_favourite_meals" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.mameal.home.view.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.mameal.authentication.view.RegisterFragment"
@@ -27,19 +42,31 @@
             app:destination="@id/loginFragment" />
         <action
             android:id="@+id/action_registerFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/splashScreenFragment"
         android:name="com.example.mameal.SplashScreenFragment"
-        android:label="SplashScreenFragment" >
+        android:label="fragment_splash_screen"
+        tools:layout="@layout/fragment_splash_screen" >
         <action
             android:id="@+id/action_splashScreenFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_splashScreenFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.example.mameal.home.view.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/countrySearchFragment"
+        android:name="com.example.mameal.search.view.CountrySearchFragment"
+        android:label="fragment_country_search"
+        tools:layout="@layout/fragment_country_search" />
+    <fragment
+        android:id="@+id/ingredientSearchFragment"
+        android:name="com.example.mameal.search.view.IngredientSearchFragment"
+        android:label="fragment_ingredient_search"
+        tools:layout="@layout/fragment_ingredient_search" />
 </navigation>

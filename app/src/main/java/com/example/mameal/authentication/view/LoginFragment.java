@@ -60,7 +60,6 @@ public class LoginFragment extends Fragment implements LoginView {
         forget_password_btn = view.findViewById(R.id.forget_password_text_view_btn);
         signin_btn = view.findViewById(R.id.signin_btn);
         google_signin_btn = view.findViewById(R.id.google_signin_img_view_btn);
-        facebook_signin_btn = view.findViewById(R.id.facebook_signin_img_view_btn);
         emailEditText = view.findViewById(R.id.email_edit_text);
         passwordEditText = view.findViewById(R.id.password_edit_text);
     }
