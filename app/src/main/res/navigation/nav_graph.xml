@@ -68,5 +68,5 @@
         android:id="@+id/ingredientSearchFragment"
         android:name="com.example.mameal.search.view.IngredientSearchFragment"
         android:label="fragment_ingredient_search"
-        tools:layout="@layout/fragment_ingredient_search" />
+        tools:layout="@layout/fragment_search" />
 </navigation>

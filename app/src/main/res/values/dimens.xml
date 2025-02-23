@@ -2,4 +2,9 @@
 <resources>
     <dimen name="starting_def_text">8dp</dimen>
     <dimen name="dist_from_bottom_nav">80dp</dimen>
+    <dimen name="search_padding_Start">16dp</dimen>
+    <dimen name="padding_prim">16dp</dimen>
+    <dimen name="drawable_start_padding_at_input_fileds">8dp</dimen>
+    <dimen name="general_layout_padding">32dp</dimen>
+    <dimen name="ingredient_padding_inside_card">20dp</dimen>
 </resources>

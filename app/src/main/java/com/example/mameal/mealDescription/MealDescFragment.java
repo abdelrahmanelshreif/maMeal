@@ -1,4 +1,4 @@
-package com.example.mameal.search.view;
+package com.example.mameal.mealDescription;
 
 import android.os.Bundle;
 
@@ -12,10 +12,10 @@ import com.example.mameal.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link IngredientSearchFragment#newInstance} factory method to
+ * Use the {@link MealDescFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class IngredientSearchFragment extends Fragment {
+public class MealDescFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class IngredientSearchFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public IngredientSearchFragment() {
+    public MealDescFragment() {
         // Required empty public constructor
     }
 
@@ -36,11 +36,11 @@ public class IngredientSearchFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment IngredientSearchFragment.
+     * @return A new instance of fragment MealDescFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static IngredientSearchFragment newInstance(String param1, String param2) {
-        IngredientSearchFragment fragment = new IngredientSearchFragment();
+    public static MealDescFragment newInstance(String param1, String param2) {
+        MealDescFragment fragment = new MealDescFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +61,6 @@ public class IngredientSearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ingredient_search, container, false);
+        return inflater.inflate(R.layout.fragment_meal_desc, container, false);
     }
 }
