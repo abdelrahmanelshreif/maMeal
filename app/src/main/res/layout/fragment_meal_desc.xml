@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context=".mealDescription.MealDescFragment" >
+    tools:context=".mealDescription.view.MealDescFragment" >
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -43,6 +43,17 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:srcCompat="@drawable/add_to_fav" />
 
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/baseline_arrow_back_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
@@ -78,7 +89,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
     <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroup"
+        android:id="@+id/mealDiscChipGroup"
         android:layout_width="wrap_content"
 
         android:layout_height="wrap_content"
@@ -89,7 +100,7 @@
         app:layout_constraintTop_toBottomOf="@+id/mealCategoryCardTextView">
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip4"
+            android:id="@+id/ingredientChip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/primary_100"
@@ -97,7 +108,7 @@
             android:textColor="@color/white" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip5"
+            android:id="@+id/procedureChip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/procedure"
@@ -105,13 +116,12 @@
     </com.google.android.material.chip.ChipGroup>
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView2"
-        android:name="com.example.mameal.mealDescription.IngredientFragment"
+        android:id="@+id/ingredientProcedureFragmentView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
+        app:layout_constraintTop_toBottomOf="@+id/mealDiscChipGroup" />
 </androidx.constraintlayout.widget.ConstraintLayout>

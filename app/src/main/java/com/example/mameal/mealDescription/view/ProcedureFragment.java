@@ -1,4 +1,4 @@
-package com.example.mameal.mealDescription;
+package com.example.mameal.mealDescription.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,13 +9,11 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mameal.R;
 
-public class IngredientFragment extends Fragment {
+public class ProcedureFragment extends Fragment {
 
-    public IngredientFragment() {
+    public ProcedureFragment() {
         // Required empty public constructor
     }
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -26,7 +24,7 @@ public class IngredientFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        return inflater.inflate(R.layout.fragment_ingredient, container, false);
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_procedure, container, false);
     }
 }

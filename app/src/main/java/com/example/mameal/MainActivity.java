@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements NetworkCallback {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+
         setContentView(R.layout.activity_main);
 
 
@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements NetworkCallback {
             if (destination.getId() == R.id.splashScreenFragment
                     || destination.getId() == R.id.loginFragment
                     || destination.getId() == R.id.registerFragment
+                    || destination.getId() == R.id.mealDescFragment
             ) {
 
                 bottomNavigationView.setVisibility(View.GONE);
