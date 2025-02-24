@@ -75,7 +75,7 @@
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/mealDescFragment"
-        android:name="com.example.mameal.mealDescription.view.MealDescFragment"
+        android:name="com.example.mameal.mealDescription.view.MealDescriptionFragment"
         android:label="fragment_meal_desc"
         tools:layout="@layout/fragment_meal_desc" >
         <action

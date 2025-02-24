@@ -39,6 +39,7 @@ dependencies {
     implementation (libs.retrofit)
     implementation (libs.adapter.rxjava3)
     implementation (libs.rxjava)
+    implementation(libs.room.rxjava3)
     implementation (libs.rxandroid)
     implementation (libs.converter.gson)
     implementation (libs.gson)

@@ -7,4 +7,5 @@
     <dimen name="drawable_start_padding_at_input_fileds">8dp</dimen>
     <dimen name="general_layout_padding">32dp</dimen>
     <dimen name="ingredient_padding_inside_card">20dp</dimen>
+    <dimen name="bottom_nav_height">80dp</dimen>
 </resources>

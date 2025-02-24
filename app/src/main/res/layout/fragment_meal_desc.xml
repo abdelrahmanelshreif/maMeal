@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context=".mealDescription.view.MealDescFragment" >
+    tools:context=".mealDescription.view.MealDescriptionFragment" >
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -115,13 +115,17 @@
             android:textColor="@color/primary_80" />
     </com.google.android.material.chip.ChipGroup>
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/ingredientProcedureFragmentView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ingredientRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_marginTop="16dp"
+        android:clipToPadding="false"
+        android:paddingTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mealDiscChipGroup" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

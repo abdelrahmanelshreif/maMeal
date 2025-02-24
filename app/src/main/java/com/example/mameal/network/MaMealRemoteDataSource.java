@@ -31,7 +31,7 @@ public class MaMealRemoteDataSource {
         call.enqueue(new Callback<MealResponse>() {
             @Override
             public void onResponse(@NonNull Call<MealResponse> call, @NonNull Response<MealResponse> response) {
-                if (response.body() != null) {
+                if (response.body() != null) {              
                     callback.onSuccessResult(response.body().getMeals());
                 }
             }

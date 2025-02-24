@@ -2,6 +2,7 @@ package com.example.mameal.mealDescription.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,7 @@ import com.example.mameal.mealDescription.model.IngredientWithMeasure;
 
 import java.util.List;
 
-public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.ViewHolder>  {
+public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.ViewHolder> {
 
 
     private final Context context;
@@ -58,6 +59,7 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
 
     @SuppressLint("NotifyDataSetChanged")
     public void updateData(List<IngredientWithMeasure> ingredientList) {
+        Log.d("IngredientsAdapter", "Adapter updating with " + ingredientList.size() + " items.");
         this.values = ingredientList;
         notifyDataSetChanged();
     }

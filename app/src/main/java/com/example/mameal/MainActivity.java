@@ -41,14 +41,17 @@ public class MainActivity extends AppCompatActivity implements NetworkCallback {
             if (destination.getId() == R.id.splashScreenFragment
                     || destination.getId() == R.id.loginFragment
                     || destination.getId() == R.id.registerFragment
-                    || destination.getId() == R.id.mealDescFragment
-            ) {
+                    || destination.getId() == R.id.mealDescFragment) {
 
                 bottomNavigationView.setVisibility(View.GONE);
+                findViewById(R.id.fragmentContainerView).setPadding(0, 0, 0, 0);
             } else {
                 bottomNavigationView.setVisibility(View.VISIBLE);
+                int bottomNavHeight = getResources().getDimensionPixelSize(R.dimen.bottom_nav_height);
+                findViewById(R.id.fragmentContainerView).setPadding(0, 0, 0, bottomNavHeight);
             }
         });
+
 
 
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
