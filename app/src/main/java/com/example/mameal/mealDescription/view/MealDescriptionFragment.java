@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,6 +29,7 @@ public class MealDescriptionFragment extends Fragment implements MealDescription
     private RecyclerView ingredientRecyclerView;
     private ConstraintLayout instructionsLayout;
     private Chip ingredientChip, procedureChip;
+    private ScrollView procedureScrollView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,11 +62,14 @@ public class MealDescriptionFragment extends Fragment implements MealDescription
             procedureChip.setChipBackgroundColorResource(R.color.white);
             procedureChip.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary_80));
 
+            procedureScrollView.setVisibility(View.GONE);
             ingredientRecyclerView.setVisibility(View.VISIBLE);
             instructionsLayout.setVisibility(View.GONE);
         });
 
         procedureChip.setOnClickListener(v -> {
+
+            procedureScrollView.setVisibility(View.VISIBLE);
             procedureChip.setChipBackgroundColorResource(R.color.primary_100);
             procedureChip.setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
 
@@ -83,6 +88,7 @@ public class MealDescriptionFragment extends Fragment implements MealDescription
         instructionsLayout = view.findViewById(R.id.instructionsLayout);
         ingredientChip = view.findViewById(R.id.ingredientChip);
         procedureChip = view.findViewById(R.id.procedureChip);
+        procedureScrollView = view.findViewById(R.id.procedureScrollView);
     }
 
     @Override
