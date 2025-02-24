@@ -85,14 +85,14 @@ public class MealDescriptionFragment extends Fragment implements MealDescription
             procedureChip.setChipBackgroundColorResource(R.color.white);
             procedureChip.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary_80));
 
-            procedureScrollView.setVisibility(View.GONE);
+//            procedureScrollView.setVisibility(View.GONE);
             ingredientRecyclerView.setVisibility(View.VISIBLE);
             instructionsLayout.setVisibility(View.GONE);
         });
 
         procedureChip.setOnClickListener(v -> {
 
-            procedureScrollView.setVisibility(View.VISIBLE);
+//            procedureScrollView.setVisibility(View.VISIBLE);
             procedureChip.setChipBackgroundColorResource(R.color.primary_100);
             procedureChip.setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
 
@@ -124,7 +124,7 @@ public class MealDescriptionFragment extends Fragment implements MealDescription
         instructionsLayout = view.findViewById(R.id.instructionsLayout);
         ingredientChip = view.findViewById(R.id.ingredientChip);
         procedureChip = view.findViewById(R.id.procedureChip);
-        procedureScrollView = view.findViewById(R.id.procedureScrollView);
+//        procedureScrollView = view.findViewById(R.id.procedureScrollView);
         webView = view.findViewById(R.id.youtubeWebView);
         mealImg = view.findViewById(R.id.mealCardImgView);
         mealTitle = view.findViewById(R.id.mealTitleCardTextViewCard);
