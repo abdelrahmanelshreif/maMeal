@@ -26,7 +26,7 @@
             <ImageView
                 android:id="@+id/mealCardImgView"
                 android:layout_width="match_parent"
-                android:layout_height="179dp"
+                android:layout_height="wrap_content"
                 android:scaleType="fitXY"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +46,6 @@
 
     </androidx.cardview.widget.CardView>
 
-    <!-- Meal Title and Category -->
     <TextView
         android:id="@+id/mealTitleCardTextViewCard"
         android:layout_width="match_parent"
@@ -54,7 +53,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/poppins_black"
-        android:gravity="start"
+        android:gravity="center"
         android:text="@string/meal_title"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,13 +63,13 @@
         android:id="@+id/mealCategoryCardTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:layout_marginStart="16dp"
         android:text="@string/meal_category"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mealTitleCardTextViewCard" />
 
-    <!-- Chip Group for Switching Views -->
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/mealDiscChipGroup"
         android:layout_width="wrap_content"
@@ -97,7 +96,7 @@
             android:textColor="@color/primary_80" />
     </com.google.android.material.chip.ChipGroup>
 
-    <!-- FrameLayout to Swap Between Views -->
+
     <FrameLayout
         android:id="@+id/contentContainer"
         android:layout_width="match_parent"
@@ -106,16 +105,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mealDiscChipGroup">
 
-        <!-- RecyclerView (Default Visible) -->
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ingredientRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:paddingTop="8dp" />
-
-        <!-- Instructions Layout (Initially Hidden) -->
-
 
         <ScrollView
             android:layout_width="match_parent"
@@ -129,13 +125,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="@dimen/padding_prim"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <TextView
                     android:id="@+id/textView19"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_bold"
+                    android:textSize="20sp"
                     android:text="@string/instructions"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -146,9 +143,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/poppins"
-                    android:padding="@dimen/padding_prim"
                     android:text="@string/mealInstreuctionSample"
                     android:textColor="@color/grey_3"
+                    android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
@@ -157,22 +154,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:textSize="20sp"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="Youtube"
+                    android:text="@string/youtube"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
-                <VideoView
-                    android:id="@+id/videoView"
+                <WebView
+                    android:id="@+id/youtubeWebView"
                     android:layout_width="match_parent"
-                    android:layout_height="340dp"
+                    android:layout_height="240sp"
                     android:layout_marginTop="16dp"
+                    android:scrollbars="none"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-
         </ScrollView>
     </FrameLayout>
 
