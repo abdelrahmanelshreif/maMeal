@@ -1,15 +1,21 @@
 package com.example.mameal.model;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
+import com.example.mameal.db.Converters;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
 @Entity(tableName = "meal_table")
+@TypeConverters(Converters.class)
 public class Meal {
 
+    @NonNull
     @PrimaryKey
     @SerializedName("idMeal")
     private String mealId;
@@ -53,10 +59,9 @@ public class Meal {
     @SerializedName("dateModified")
     private String dateModified;
 
-    // Empty Constructor for Gson
+    @Ignore
     public Meal() {
     }
-
 
     public Meal(String mealId, String mealTitle, String drinkAlternate, String mealCategory, String mealThumb,
                 String mealTags, String mealYoutube, String mealInstructions, List<String> mealIngredients,

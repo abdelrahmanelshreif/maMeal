@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.mameal.R;
+import com.example.mameal.db.MealsLocalDataSource;
 import com.example.mameal.mealDescription.model.IngredientWithMeasure;
 import com.example.mameal.mealDescription.presenter.MealDescriptionPresenter;
 import com.example.mameal.model.MaMealRepository;
@@ -46,7 +47,7 @@ public class MealDescriptionFragment extends Fragment implements MealDescription
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.mealDescriptionPresenter = new MealDescriptionPresenter(
-                MaMealRepository.getInstance(new MaMealRemoteDataSource()),
+                MaMealRepository.getInstance(MaMealRemoteDataSource.getInstance(), new MealsLocalDataSource(getContext())),
                 new IngredientWithMeasure()
         );
     }

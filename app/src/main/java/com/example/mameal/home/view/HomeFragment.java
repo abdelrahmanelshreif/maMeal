@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mameal.R;
+import com.example.mameal.db.MealsLocalDataSource;
 import com.example.mameal.home.presenter.HomePresenter;
 import com.example.mameal.model.MaMealRepository;
 import com.example.mameal.network.MaMealRemoteDataSource;
@@ -50,7 +51,7 @@ public class HomeFragment extends Fragment implements HomeView {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         homePresenter = new HomePresenter(this
-                , MaMealRepository.getInstance(new MaMealRemoteDataSource())
+                , MaMealRepository.getInstance(MaMealRemoteDataSource.getInstance(),new MealsLocalDataSource(getContext()))
                 , new MealUiModel()
         );
     }
@@ -117,9 +118,9 @@ public class HomeFragment extends Fragment implements HomeView {
 
     private void setupRecyclerView(RecyclerView recyclerView, List<MealUiModel> dummyMeals) {
         if (recyclerView != null) {
-            AllMealsAdapter allMealsAdapter = new AllMealsAdapter(getContext(), dummyMeals);
+            MealByCategoryAdapter mealByCategoryAdapter = new MealByCategoryAdapter(getContext(), dummyMeals);
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-            recyclerView.setAdapter(allMealsAdapter);
+            recyclerView.setAdapter(mealByCategoryAdapter);
         }
 
     }

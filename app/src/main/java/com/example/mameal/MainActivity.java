@@ -10,6 +10,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.mameal.db.MealsLocalDataSource;
 import com.example.mameal.model.MaMealRepository;
 import com.example.mameal.model.Meal;
 import com.example.mameal.network.MaMealRemoteDataSource;
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements NetworkCallback {
 
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
-        MaMealRepository.getInstance(new MaMealRemoteDataSource()).getAllMealsData();
+//        MaMealRepository.getInstance(MaMealRemoteDataSource.getInstance(),new MealsLocalDataSource(this)).getAllMealsData();
     }
 
     @Override

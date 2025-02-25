@@ -17,8 +17,10 @@ interface MaMealService {
     Flowable<MealResponse> getAllMeals();
 
     @GET("categories.php")
-    Single<List<Category>> getAllCategories();
+    Single<List<Category>> getAllCategoriesData();
 
+    @GET("list.php?c=list")
+    Single<List<Category>> getCategoriesNames();
     @GET("random.php")
     Single<Meal> getRandomMeal();
 
@@ -36,5 +38,8 @@ interface MaMealService {
 
     @GET("search.php")
     Single<Meal> getMealByName(@Query("s") String mealName);
+
+
+
 
 }

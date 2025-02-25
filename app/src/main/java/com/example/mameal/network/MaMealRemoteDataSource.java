@@ -12,14 +12,22 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MaMealRemoteDataSource {
     private static final String BASE_URL = "https://www.themealdb.com/api/json/v1/1/";
 
+    private static MaMealRemoteDataSource instance;
     private final MaMealService maMealService;
 
-    public MaMealRemoteDataSource() {
+    private MaMealRemoteDataSource() {
         Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .build();
         maMealService = retrofit.create(MaMealService.class);
+    }
+
+    public static synchronized MaMealRemoteDataSource getInstance() {
+        if (instance == null) {
+            instance = new MaMealRemoteDataSource();
+        }
+        return instance;
     }
 
     public Flowable<MealResponse> getAllMeals() {
