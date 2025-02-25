@@ -5,12 +5,11 @@ import java.util.List;
 
 public interface MealDescriptionContract {
     public interface View {
-        void showIngredients(List<IngredientWithMeasure> ingredientList); // ✅ Now takes a parameter
-        void showProcedure();
-    }
+        void showIngredients(List<IngredientWithMeasure> ingredientList);
 
+    }
     public interface Presenter {
         List<IngredientWithMeasure> getIngredients();
-        void getProcedure();
+
     }
 }

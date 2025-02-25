@@ -1,12 +1,10 @@
 package com.example.mameal.network;
 
-import androidx.annotation.NonNull;
-
+import com.example.mameal.model.Meal;
 import com.example.mameal.model.MealResponse;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.core.Single;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -14,7 +12,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MaMealRemoteDataSource {
     private static final String BASE_URL = "https://www.themealdb.com/api/json/v1/1/";
 
-    NetworkCallback callback;
     private final MaMealService maMealService;
 
     public MaMealRemoteDataSource() {
@@ -22,26 +19,19 @@ public class MaMealRemoteDataSource {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .build();
-
         maMealService = retrofit.create(MaMealService.class);
     }
 
-    public void getAllMeals(NetworkCallback callback) {
-        Call<MealResponse> call = maMealService.getAllMeals();
-        call.enqueue(new Callback<MealResponse>() {
-            @Override
-            public void onResponse(@NonNull Call<MealResponse> call, @NonNull Response<MealResponse> response) {
-                if (response.body() != null) {              
-                    callback.onSuccessResult(response.body().getMeals());
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<MealResponse> call, @NonNull Throwable throwable) {
-                callback.onFailureResult(throwable.getMessage());
-            }
-        });
+    public Flowable<MealResponse> getAllMeals() {
+        return maMealService.getAllMeals();
     }
 
+    public Single<Meal> getDailyMeal() {
+        return maMealService.getRandomMeal();
+    }
+
+    public Single<Meal> getMealbyId(String id) {
+        return maMealService.getMealById(id);
+    }
 
 }

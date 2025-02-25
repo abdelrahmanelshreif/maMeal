@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements NetworkCallback {
 
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
-        MaMealRepository.getInstance(new MaMealRemoteDataSource()).getAllMealsData(this);
+        MaMealRepository.getInstance(new MaMealRemoteDataSource()).getAllMealsData();
     }
 
     @Override

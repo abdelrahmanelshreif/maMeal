@@ -24,10 +24,6 @@ public class MealDescriptionPresenter implements MealDescriptionContract.Present
         return DummyData.getDummyIngredients();
     }
 
-    @Override
-    public void getProcedure() {
-        // Not implemented yet
-    }
 
     public static class DummyData {
         public static List<IngredientWithMeasure> getDummyIngredients() {

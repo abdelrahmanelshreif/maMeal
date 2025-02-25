@@ -1,7 +1,8 @@
 package com.example.mameal.model;
 
 import com.example.mameal.network.MaMealRemoteDataSource;
-import com.example.mameal.network.NetworkCallback;
+
+import io.reactivex.rxjava3.core.Flowable;
 
 public class MaMealRepository {
 
@@ -20,8 +21,8 @@ public class MaMealRepository {
         return repo;
     }
 
-    public void getAllMealsData(NetworkCallback callback) {
-        maMealRemoteDataSource.getAllMeals(callback);
+    public Flowable<MealResponse> getAllMealsData() {
+        maMealRemoteDataSource.getAllMeals();
     }
 
 }

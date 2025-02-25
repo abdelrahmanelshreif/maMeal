@@ -6,21 +6,20 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Flowable;
+
 public class MealResponse {
 
     @SerializedName("meals")
-    private Observable<List<Meal>> meals;
+    private Flowable<List<Meal>> meals;
 
 
-    public MealResponse(Observable<List<Meal>> meals) {
+    public MealResponse(Flowable<List<Meal>> meals) {
         this.meals = meals;
     }
 
-    public Observable<List<Meal>> getMeals() {
+    public Flowable<List<Meal>> getMeals() {
         return meals;
     }
 
-    public void setMeals(Observable<List<Meal>>meals) {
-        this.meals = meals;
-    }
 }
