@@ -8,4 +8,7 @@
     <dimen name="general_layout_padding">32dp</dimen>
     <dimen name="ingredient_padding_inside_card">20dp</dimen>
     <dimen name="bottom_nav_height">80dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="fragment_horizontal_margin">16dp</dimen>
+    <dimen name="fragment_vertical_margin">16dp</dimen>
 </resources>

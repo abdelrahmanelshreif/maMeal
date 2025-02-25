@@ -22,7 +22,7 @@ public class MaMealRepository {
     }
 
     public Flowable<MealResponse> getAllMealsData() {
-        maMealRemoteDataSource.getAllMeals();
+       return  maMealRemoteDataSource.getAllMeals();
     }
 
 }

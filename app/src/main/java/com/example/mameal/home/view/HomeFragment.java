@@ -1,10 +1,12 @@
 package com.example.mameal.home.view;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,10 +26,19 @@ import java.util.List;
 
 public class HomeFragment extends Fragment implements HomeView {
 
-    RecyclerView recyclerView1;
 
-    TextView helloText, welcomeText;
-    ImageView profileImg;
+    private LinearLayout linearLayoutSections;
+    private RecyclerView recyclerView1;
+    private RecyclerView recyclerView2;
+    private RecyclerView recyclerView3;
+    private RecyclerView recyclerView4;
+
+    private TextView sectionTitle1;
+    private TextView sectionTitle2;
+    private TextView sectionTitle3;
+    private TextView sectionTitle4;
+    private TextView helloText, welcomeText;
+    private ImageView profileImg;
 
     HomePresenter homePresenter;
 
@@ -59,21 +70,57 @@ public class HomeFragment extends Fragment implements HomeView {
         homePresenter.loadMeals();
     }
 
+    @SuppressLint("CutPasteId")
     private void setupUiComponent(View view) {
-        recyclerView1 = view.findViewById(R.id.homeRecyclerView1);
-
-
         helloText = view.findViewById(R.id.textView12);
         welcomeText = view.findViewById(R.id.textView13);
+        linearLayoutSections = view.findViewById(R.id.sectionsLinearLayout);
+
+        initializeSection(R.id.home_section1, 0);
+        initializeSection(R.id.home_section2, 1);
+        initializeSection(R.id.home_section3, 2);
+        initializeSection(R.id.home_section4, 3);
+    }
+
+    private void initializeSection(int sectionId, int index) {
+        View section = linearLayoutSections.findViewById(sectionId);
+
+        RecyclerView recyclerView = section.findViewById(R.id.homeRecyclerView);
+        TextView sectionTitle = section.findViewById(R.id.sectionTitle);
+        switch (index) {
+            case 0:
+                recyclerView1 = recyclerView;
+                sectionTitle1 = sectionTitle;
+                break;
+            case 1:
+                recyclerView2 = recyclerView;
+                sectionTitle2 = sectionTitle;
+                break;
+            case 2:
+                recyclerView3 = recyclerView;
+                sectionTitle3 = sectionTitle;
+                break;
+            case 3:
+                recyclerView4 = recyclerView;
+                sectionTitle4 = sectionTitle;
+        }
     }
 
     @Override
     public void showMeals(List<MealUiModel> dummyMeals) {
-        AllMealsAdapter allMealsAdapter = new AllMealsAdapter(getContext(), dummyMeals);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerView1.setLayoutManager(layoutManager);
-        recyclerView1.setAdapter(allMealsAdapter);
+        setupRecyclerView(recyclerView1, dummyMeals);
+        setupRecyclerView(recyclerView2, dummyMeals);
+        setupRecyclerView(recyclerView3, dummyMeals);
+        setupRecyclerView(recyclerView4, dummyMeals);
 
+    }
+
+    private void setupRecyclerView(RecyclerView recyclerView, List<MealUiModel> dummyMeals) {
+        if (recyclerView != null) {
+            AllMealsAdapter allMealsAdapter = new AllMealsAdapter(getContext(), dummyMeals);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+            recyclerView.setAdapter(allMealsAdapter);
+        }
 
     }
 

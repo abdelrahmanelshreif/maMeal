@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/mealDescFragment">
+    app:startDestination="@id/splashScreenFragment">
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.mameal.authentication.view.LoginFragment"
@@ -51,7 +51,7 @@
     </fragment>
     <fragment
         android:id="@+id/splashScreenFragment"
-        android:name="com.example.mameal.SplashScreenFragment"
+        android:name="com.example.mameal.splash.view.SplashScreenFragment"
         android:label="fragment_splash_screen"
         tools:layout="@layout/fragment_splash_screen" >
         <action
