@@ -41,6 +41,9 @@ public class Meal {
     @SerializedName("strInstructions")
     private String mealInstructions;
 
+    @SerializedName("strArea")
+    private String mealArea;
+
     @SerializedName("strIngredients")
     private List<String> mealIngredients;
 
@@ -193,5 +196,13 @@ public class Meal {
 
     public void setDateModified(String dateModified) {
         this.dateModified = dateModified;
+    }
+
+    public void setMealArea(String mealArea) {
+        this.mealArea = mealArea;
+    }
+
+    public String getMealArea() {
+        return mealArea;
     }
 }

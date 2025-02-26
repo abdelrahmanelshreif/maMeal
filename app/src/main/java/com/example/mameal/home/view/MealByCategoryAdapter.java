@@ -12,16 +12,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.mameal.R;
-import com.example.mameal.uiModel.MealUiModel;
+import com.example.mameal.model.Meal;
 
 import java.util.List;
 
 public class MealByCategoryAdapter extends RecyclerView.Adapter<MealByCategoryAdapter.ViewHolder> {
     private final Context context;
-    private List<MealUiModel> values;
+    private List<Meal> values;
 
 
-    public MealByCategoryAdapter(Context context, List<MealUiModel> values) {
+    public MealByCategoryAdapter(Context context, List<Meal> values) {
         this.context = context;
         this.values = values;
 
@@ -38,10 +38,10 @@ public class MealByCategoryAdapter extends RecyclerView.Adapter<MealByCategoryAd
 
     @Override
     public void onBindViewHolder(@NonNull MealByCategoryAdapter.ViewHolder holder, int position) {
-        MealUiModel meal = values.get(position);
+        Meal meal = values.get(position);
         holder.mealTitle.setText(meal.getMealTitle());
         Glide.with(context)
-                .load(meal.getMealImgSource())
+                .load(meal.getMealThumb())
                 .placeholder(R.drawable.default_menu_image_placeholder)
                 .error(R.drawable.default_menu_image_placeholder)
                 .into(holder.mealImage);

@@ -89,6 +89,7 @@
                         android:weightSum="2">
 
                         <ImageView
+                            android:id="@+id/dailyMealImage"
                             android:layout_width="match_parent"
                             android:layout_height="200dp"
                             android:layout_weight="1"
@@ -98,6 +99,7 @@
                             android:visibility="visible" />
 
                         <TextView
+                            android:id="@+id/dailyMealTitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
@@ -108,6 +110,7 @@
                             android:textSize="20sp" />
 
                         <TextView
+                            android:id="@+id/daiylMealArea"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
@@ -130,22 +133,6 @@
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
-                <include
-                    android:id="@+id/home_section1"
-                    layout="@layout/home_section" />
-
-                <include
-                    android:id="@+id/home_section2"
-                    layout="@layout/home_section" />
-
-                <include
-                    android:id="@+id/home_section3"
-                    layout="@layout/home_section" />
-
-                <include
-                    android:id="@+id/home_section4"
-                    layout="@layout/home_section" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

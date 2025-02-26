@@ -1,8 +1,6 @@
 package com.example.mameal;
 
-import android.database.Observable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,16 +8,9 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.mameal.db.MealsLocalDataSource;
-import com.example.mameal.model.MaMealRepository;
-import com.example.mameal.model.Meal;
-import com.example.mameal.network.MaMealRemoteDataSource;
-import com.example.mameal.network.NetworkCallback;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.List;
-
-public class MainActivity extends AppCompatActivity implements NetworkCallback {
+public class MainActivity extends AppCompatActivity {
 
 
     private NavController navController;
@@ -54,16 +45,9 @@ public class MainActivity extends AppCompatActivity implements NetworkCallback {
 
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
-//        MaMealRepository.getInstance(MaMealRemoteDataSource.getInstance(),new MealsLocalDataSource(this)).getAllMealsData();
-    }
 
-    @Override
-    public void onSuccessResult(Observable<List<Meal>> meals) {
-        Log.i("TAG", "onSuccessResult: " + meals);
-    }
-
-    @Override
-    public void onFailureResult(String errMsg) {
-        Log.i("TAG", "onFailureResult: " + errMsg);
     }
 }
+
+
+
