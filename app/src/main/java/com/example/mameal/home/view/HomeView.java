@@ -1,5 +1,7 @@
 package com.example.mameal.home.view;
 
+import android.view.View;
+
 import com.example.mameal.home.model.CategoryWithMeals;
 import com.example.mameal.model.Meal;
 
@@ -12,5 +14,5 @@ public interface HomeView {
     void setDailyMealData(Meal meal);
     void showError(String err);
 
-
+    void navigateToMealDescription(View view, String mealId);
 }

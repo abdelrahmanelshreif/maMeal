@@ -1,36 +1,38 @@
 package com.example.mameal.home.view;
 
 import android.os.Bundle;
-import android.service.credentials.Action;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.bumptech.glide.Glide;
+
 import com.example.mameal.R;
 import com.example.mameal.authentication.view.OnMealClickListener;
 import com.example.mameal.home.model.CategoryWithMeals;
 import com.example.mameal.home.presenter.HomePresenter;
 import com.example.mameal.model.Meal;
 import com.example.mameal.utils.Utility;
+
 import java.util.List;
 
-public class HomeFragment extends Fragment implements HomeView , OnMealClickListener {
+public class HomeFragment extends Fragment implements HomeView, OnMealClickListener {
 
     private LinearLayout linearLayoutSections;
     private TextView dailyMealTitle, dailyMealArea;
     private ImageView dailyMealImage;
     private HomePresenter homePresenter;
-
+    private CardView dailyMealCard;
+    String dailyMealId;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,7 @@ public class HomeFragment extends Fragment implements HomeView , OnMealClickList
         setupUiComponents(view);
         homePresenter.getDailyMeal();
         homePresenter.loadMealsSections();
+        dailyMealCard.setOnClickListener(v -> homePresenter.handleMealsNavigation(view, dailyMealId));
 
     }
 
@@ -56,10 +59,8 @@ public class HomeFragment extends Fragment implements HomeView , OnMealClickList
         dailyMealTitle = view.findViewById(R.id.dailyMealTitle);
         dailyMealArea = view.findViewById(R.id.daiylMealArea);
         dailyMealImage = view.findViewById(R.id.dailyMealImage);
+        dailyMealCard = view.findViewById(R.id.dailyMealCard);
         linearLayoutSections = view.findViewById(R.id.sectionsLinearLayout);
-        if (linearLayoutSections == null) {
-            Log.e("HomeFragment", "LinearLayout sectionsLinearLayout is null");
-        }
     }
 
     @Override
@@ -72,13 +73,10 @@ public class HomeFragment extends Fragment implements HomeView , OnMealClickList
 
     @Override
     public void setDailyMealData(Meal meal) {
+        dailyMealId = meal.getMealId();
         dailyMealTitle.setText(meal.getMealTitle());
         dailyMealArea.setText(meal.getMealArea());
-        Glide.with(getContext())
-                .load(meal.getMealThumb())
-                .placeholder(R.drawable.default_menu_image_placeholder)
-                .error(R.drawable.default_menu_image_placeholder)
-                .into(dailyMealImage);
+        Utility.loadImage(this, meal.getMealThumb(), dailyMealImage);
     }
 
     private void addCategorySection(CategoryWithMeals category) {
@@ -91,7 +89,7 @@ public class HomeFragment extends Fragment implements HomeView , OnMealClickList
     }
 
     private void setupRecyclerView(RecyclerView recyclerView, List<Meal> meals) {
-        MealByCategoryAdapter adapter = new MealByCategoryAdapter(getContext(), meals,this);
+        MealByCategoryAdapter adapter = new MealByCategoryAdapter(getContext(), meals, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setAdapter(adapter);
     }
@@ -102,14 +100,20 @@ public class HomeFragment extends Fragment implements HomeView , OnMealClickList
     }
 
     @Override
+    public void navigateToMealDescription(View view, String mealId) {
+        com.example.mameal.home.view.HomeFragmentDirections.ActionHomeFragmentToMealDescFragment action = HomeFragmentDirections.actionHomeFragmentToMealDescFragment(mealId);
+        Navigation.findNavController(view).navigate(action);
+    }
+
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         homePresenter.detachView();
     }
 
     @Override
-    public void onClick(View view ,String mealId) {
-        com.example.mameal.home.view.HomeFragmentDirections.ActionHomeFragmentToMealDescFragment action = HomeFragmentDirections.actionHomeFragmentToMealDescFragment(mealId);
-        Navigation.findNavController(view).navigate(action);
+    public void onClick(View view, String mealId) {
+        homePresenter.handleMealsNavigation(view, mealId);
     }
 }

@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.mameal.R;
+import com.example.mameal.authentication.view.OnMealClickListener;
 import com.example.mameal.db.MealsLocalDataSource;
 import com.example.mameal.mealDescription.model.Ingredient;
 import com.example.mameal.mealDescription.presenter.MealDescriptionPresenter;

@@ -1,6 +1,7 @@
 package com.example.mameal.home.presenter;
 
 import android.content.Context;
+import android.view.View;
 
 import com.example.mameal.db.MealsLocalDataSource;
 import com.example.mameal.home.view.HomeView;
@@ -58,5 +59,10 @@ public class HomePresenter {
 
     public void detachView() {
         compositeDisposable.clear();
+    }
+
+    public void handleMealsNavigation(View view, String mealId) {
+        homeView.navigateToMealDescription(view, mealId);
+
     }
 }
