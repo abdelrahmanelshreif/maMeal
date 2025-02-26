@@ -2,6 +2,7 @@ package com.example.mameal.mealDescription.view;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,7 @@ public class MealDescriptionFragment extends Fragment implements MealDescription
     private Chip ingredientChip, procedureChip;
     ImageView addToFav, mealImg;
     TextView mealTitle, mealCategory;
+    TextView instructions;
     private WebView webView;
 
     @Override
@@ -77,6 +79,7 @@ public class MealDescriptionFragment extends Fragment implements MealDescription
         mealTitle = view.findViewById(R.id.mealTitleCardTextViewCard);
         mealCategory = view.findViewById(R.id.mealCategoryCardTextView);
         addToFav = view.findViewById(R.id.mealAddToFavBtn);
+        instructions = view.findViewById(R.id.textView20);
         ingredientRecyclerView.setVisibility(View.VISIBLE);
         instructionsLayout.setVisibility(View.GONE);
         ingredientChip.setOnClickListener(v -> {
@@ -118,6 +121,7 @@ public class MealDescriptionFragment extends Fragment implements MealDescription
     public void setMealMainData(Meal meal) {
         setMealTextData(meal);
         loadImage(meal.getMealThumb());
+
         loadYoutubeVideo(mealDescriptionPresenter.getFormattedYoutubeUrl(meal.getMealYoutube()));
     }
 
@@ -125,6 +129,8 @@ public class MealDescriptionFragment extends Fragment implements MealDescription
     private void setMealTextData(Meal meal) {
         mealTitle.setText(meal.getMealTitle());
         mealCategory.setText(meal.getMealCategory());
+        Log.i("TAG", "setMealTextData: "+meal.getMealInstructions());
+        instructions.setText(mealDescriptionPresenter.getFormattedInstructions(meal));
     }
 
     private void loadImage(String imageUrl) {

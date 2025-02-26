@@ -16,5 +16,7 @@ public interface MealDescriptionContract {
         void getMealData(String mealId);
         String getFormattedYoutubeUrl(String youtubeUrl);
         void getIngredients(String mealId);
+
+        String getFormattedInstructions(Meal meal);
     }
 }

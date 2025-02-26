@@ -3,6 +3,7 @@ package com.example.mameal.mealDescription.presenter;
 import com.example.mameal.mealDescription.model.Ingredient;
 import com.example.mameal.mealDescription.view.MealDescriptionContract;
 import com.example.mameal.model.MaMealRepository;
+import com.example.mameal.model.Meal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +61,11 @@ public class MealDescriptionPresenter implements MealDescriptionContract.Present
                 );
 
         compositeDisposable.add(disposable);
+    }
+
+    @Override
+    public String getFormattedInstructions(Meal meal) {
+        return meal.getMealInstructions().replace("\r\n" , "\n");
     }
 
 
