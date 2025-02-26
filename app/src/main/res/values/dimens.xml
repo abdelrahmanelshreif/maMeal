@@ -12,4 +12,5 @@
     <dimen name="fragment_horizontal_margin">16dp</dimen>
     <dimen name="fragment_vertical_margin">16dp</dimen>
     <dimen name="InclusiveTextViewCardPadding">16dp</dimen>
+    <dimen name="daily_meal_layout_height">200dp</dimen>
 </resources>

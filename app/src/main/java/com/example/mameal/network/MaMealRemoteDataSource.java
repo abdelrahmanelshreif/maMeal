@@ -46,7 +46,8 @@ public class MaMealRemoteDataSource {
     }
 
     public Single<Meal> getMealbyId(String id) {
-        return maMealService.getMealById(id);
+        return maMealService.getMealById(id)
+                .map(mealResponse -> mealResponse.getMeals().get(0));
     }
 
     public Single<CategoryResponse> getCategoriesNamesOnly() {

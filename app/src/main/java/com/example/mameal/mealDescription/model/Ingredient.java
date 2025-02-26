@@ -1,12 +1,12 @@
 package com.example.mameal.mealDescription.model;
 
-public class IngredientWithMeasure {
+public class Ingredient {
     String ingredientTitle;
     String ingredientMeasure;
     String ingredientThumbnail;
 
-    public IngredientWithMeasure(){}
-    public IngredientWithMeasure(String ingredientTitle, String ingredientMeasure, String ingredientThumbnail) {
+    public Ingredient(){}
+    public Ingredient(String ingredientTitle, String ingredientMeasure, String ingredientThumbnail) {
         this.ingredientTitle = ingredientTitle;
         this.ingredientMeasure = ingredientMeasure;
         this.ingredientThumbnail = ingredientThumbnail;

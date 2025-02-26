@@ -10,4 +10,10 @@
         <item name="cornerSize">25%</item>
 
     </style>
+
+    <style name="daily_meal_rounded_style">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
 </resources>

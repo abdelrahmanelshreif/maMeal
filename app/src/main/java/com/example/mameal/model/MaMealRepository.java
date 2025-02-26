@@ -50,6 +50,9 @@ public class MaMealRepository {
     {
         return maMealRemoteDataSource.getDailyMeal();
     }
+    public Single<Meal> getMealById(String id){
+        return maMealRemoteDataSource.getMealbyId(id);
+    }
 
 
 }

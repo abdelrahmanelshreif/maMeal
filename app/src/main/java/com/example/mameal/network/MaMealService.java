@@ -35,7 +35,7 @@ interface MaMealService {
     Single<MealResponse> getMealsByIngredient(@Query("i") String ingredient);
 
     @GET("lookup.php")
-    Single<Meal> getMealById(@Query("i") String mealId);
+    Single<MealResponse> getMealById(@Query("i") String mealId);
 
     @GET("search.php")
     Single<Meal> getMealByName(@Query("s") String mealName);

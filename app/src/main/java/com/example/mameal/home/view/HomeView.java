@@ -11,4 +11,6 @@ public interface HomeView {
 
     void setDailyMealData(Meal meal);
     void showError(String err);
+
+
 }

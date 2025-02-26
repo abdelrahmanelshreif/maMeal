@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.mameal.R;
-import com.example.mameal.mealDescription.model.IngredientWithMeasure;
+import com.example.mameal.mealDescription.model.Ingredient;
 
 import java.util.List;
 
@@ -23,9 +23,9 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
 
     private final Context context;
 
-    List<IngredientWithMeasure> values;
+    List<Ingredient> values;
 
-    public IngredientsAdapter(Context context, List<IngredientWithMeasure> values) {
+    public IngredientsAdapter(Context context, List<Ingredient> values) {
         this.context = context;
         this.values = values;
     }
@@ -40,12 +40,12 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        IngredientWithMeasure ingredientWithMeasure = values.get(position);
+        Ingredient ingredient = values.get(position);
 
-        holder.ingredientTitleTextView.setText(ingredientWithMeasure.getIngredientTitle());
-        holder.ingredientMeasureTextView.setText(ingredientWithMeasure.getIngredientMeasure());
+        holder.ingredientTitleTextView.setText(ingredient.getIngredientTitle());
+        holder.ingredientMeasureTextView.setText(ingredient.getIngredientMeasure());
         Glide.with(context)
-                .load(ingredientWithMeasure.getIngredientThumbnail())
+                .load(ingredient.getIngredientThumbnail())
                 .placeholder(R.drawable.default_menu_image_placeholder)
                 .error(R.drawable.default_menu_image_placeholder)
                 .into(holder.ingredientImgView);
@@ -58,7 +58,7 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    public void updateData(List<IngredientWithMeasure> ingredientList) {
+    public void updateData(List<Ingredient> ingredientList) {
         Log.d("IngredientsAdapter", "Adapter updating with " + ingredientList.size() + " items.");
         this.values = ingredientList;
         notifyDataSetChanged();

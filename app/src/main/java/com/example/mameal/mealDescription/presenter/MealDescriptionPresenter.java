@@ -1,41 +1,84 @@
 package com.example.mameal.mealDescription.presenter;
 
-import static android.provider.Settings.System.getString;
-
-import com.example.mameal.R;
-import com.example.mameal.mealDescription.model.IngredientWithMeasure;
+import com.example.mameal.mealDescription.model.Ingredient;
 import com.example.mameal.mealDescription.view.MealDescriptionContract;
 import com.example.mameal.model.MaMealRepository;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class MealDescriptionPresenter implements MealDescriptionContract.Presenter {
 
     MaMealRepository maMealRepository;
-    IngredientWithMeasure ingredientWithMeasure;
+    Ingredient ingredient;
 
-    public MealDescriptionPresenter(MaMealRepository maMealRepository, IngredientWithMeasure ingredientWithMeasure) {
+    MealDescriptionContract.View mealDescriptionView;
+    CompositeDisposable compositeDisposable;
+
+    public MealDescriptionPresenter(MaMealRepository maMealRepository, Ingredient ingredient, MealDescriptionContract.View view) {
         this.maMealRepository = maMealRepository;
-        this.ingredientWithMeasure = ingredientWithMeasure;
+        this.ingredient = ingredient;
+        this.mealDescriptionView = view;
+        this.compositeDisposable = new CompositeDisposable();
     }
 
     @Override
-    public List<IngredientWithMeasure> getIngredients() {
-        return DummyData.getDummyIngredients();
+    public void getIngredients(String mealId) {
+        Disposable disposable = maMealRepository.getMealById(mealId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .flatMap(meal -> {
+                    List<String> ingredients = meal.getIngredients();
+                    List<String> measures = meal.getMeasures();
+
+                    return Single.zip(
+                            Observable.fromIterable(ingredients).toList(),
+                            Observable.fromIterable(measures).toList(),
+                            (ingredientList, measureList) -> {
+                                List<Ingredient> ingredientObjects = new ArrayList<>();
+                                for (int i = 0; i < ingredientList.size(); i++) {
+                                    ingredientObjects.add(new Ingredient(
+                                            ingredientList.get(i),
+                                            (i < measureList.size()) ? measureList.get(i) : "",
+                                            "https://www.themealdb.com/images/ingredients/" + ingredientList.get(i) + "-Small.png"
+                                    ));
+                                }
+                                return ingredientObjects;
+                            }
+                    );
+                })
+                .subscribe(
+                        ingredients -> mealDescriptionView.showIngredients(ingredients),
+                        error -> mealDescriptionView.showError(error.getMessage())
+                );
+
+        compositeDisposable.add(disposable);
     }
 
 
-    public static class DummyData {
-        public static List<IngredientWithMeasure> getDummyIngredients() {
-            List<IngredientWithMeasure> ingredients = new ArrayList<>();
-            ingredients.add(new IngredientWithMeasure("Flour", "2 cups", "https://www.hhs1.com/hubfs/carrots%20on%20wood-1.jpg"));
-            ingredients.add(new IngredientWithMeasure("Sugar", "1 cup", "https://www.hhs1.com/hubfs/carrots%20on%20wood-1.jpg"));
-            ingredients.add(new IngredientWithMeasure("Butter", "100g", "https://www.hhs1.com/hubfs/carrots%20on%20wood-1.jpg"));
-            ingredients.add(new IngredientWithMeasure("Eggs", "2 pieces", "https://www.hhs1.com/hubfs/carrots%20on%20wood-1.jpg"));
-            ingredients.add(new IngredientWithMeasure("Milk", "1/2 cup", "https://www.hhs1.com/hubfs/carrots%20on%20wood-1.jpg"));
-            ingredients.add(new IngredientWithMeasure("Vanilla Extract", "1 tsp", "https://www.hhs1.com/hubfs/carrots%20on%20wood-1.jpg"));
+    @Override
+    public void getMealData(String mealId) {
+        Disposable disposable = maMealRepository.getMealById(mealId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(meal -> mealDescriptionView.setMealMainData(meal));
+        compositeDisposable.add(disposable);
+    }
 
-            return ingredients;
+    @Override
+    public String getFormattedYoutubeUrl(String youtubeUrl) {
+        if (youtubeUrl.contains("watch?v=")) {
+            return youtubeUrl.replace("watch?v=", "embed/");
         }
+        return youtubeUrl;
     }
+
+
 }

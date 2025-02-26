@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.mameal.R;
+import com.example.mameal.authentication.view.OnMealClickListener;
 import com.example.mameal.model.Meal;
 
 import java.util.List;
@@ -20,12 +21,12 @@ public class MealByCategoryAdapter extends RecyclerView.Adapter<MealByCategoryAd
     private final Context context;
     private List<Meal> values;
 
+    private OnMealClickListener onMealClickListener;
 
-    public MealByCategoryAdapter(Context context, List<Meal> values) {
+    public MealByCategoryAdapter(Context context, List<Meal> values, OnMealClickListener onMealClickListener) {
         this.context = context;
         this.values = values;
-
-
+        this.onMealClickListener = onMealClickListener;
     }
 
     @NonNull
@@ -45,6 +46,7 @@ public class MealByCategoryAdapter extends RecyclerView.Adapter<MealByCategoryAd
                 .placeholder(R.drawable.default_menu_image_placeholder)
                 .error(R.drawable.default_menu_image_placeholder)
                 .into(holder.mealImage);
+        holder.mealImage.setOnClickListener(v -> onMealClickListener.onClick(v, meal.getMealId()));
 
     }
 
