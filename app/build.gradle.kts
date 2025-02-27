@@ -38,6 +38,8 @@ android {
 
 dependencies {
     implementation(libs.retrofit)
+    testImplementation(platform(libs.junit.bom))
+    testImplementation(libs.junit.jupiter)
     implementation(libs.adapter.rxjava3)
     implementation(libs.rxjava)
     implementation(libs.room.rxjava3)
