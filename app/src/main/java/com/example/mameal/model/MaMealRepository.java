@@ -39,6 +39,18 @@ public class MaMealRepository {
         return maMealRemoteDataSource.getCategoriesNamesOnly();
     }
 
+    public Single<CategoryDataResponse> getCategories(){
+        return maMealRemoteDataSource.getCategoriesWithDetails();
+    }
+
+    public Single<CountryResponse> getAreas(){
+        return  maMealRemoteDataSource.getAreas();
+    }
+    public Flowable<IngredientResponse> getIngredients(){
+        return maMealRemoteDataSource.getIngredients();
+    }
+
+
     public Single<MealResponse> getHomeScreenMealsDataByCategory(String category) {
         return maMealRemoteDataSource.getMealsByCategory(category);
     }

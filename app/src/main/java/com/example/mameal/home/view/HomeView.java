@@ -15,4 +15,6 @@ public interface HomeView {
     void showError(String err);
 
     void navigateToMealDescription(View view, String mealId);
+
+    void successAddingToFav(String successfullyAddedToFavourite);
 }

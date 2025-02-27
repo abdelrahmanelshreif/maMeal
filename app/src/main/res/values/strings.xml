@@ -62,4 +62,7 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="splash_logo_desc">maMeal</string>
+    <string name="search_area_text">Search</string>
+    <string name="country_name">Country</string>
+    <string name="category_name">Category</string>
 </resources>

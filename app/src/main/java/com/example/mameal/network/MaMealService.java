@@ -1,7 +1,10 @@
 package com.example.mameal.network;
 
 import com.example.mameal.model.Category;
+import com.example.mameal.model.CategoryDataResponse;
 import com.example.mameal.model.CategoryResponse;
+import com.example.mameal.model.CountryResponse;
+import com.example.mameal.model.IngredientResponse;
 import com.example.mameal.model.Meal;
 import com.example.mameal.model.MealResponse;
 
@@ -18,9 +21,9 @@ interface MaMealService {
     Flowable<MealResponse> getAllMeals();
 
     @GET("categories.php")
-    Single<CategoryResponse> getAllCategoriesData();
+    Single<CategoryDataResponse> getAllCategoriesData();
 
-    @GET("list.php?c=list")
+    @GET("list.php?c")
     Single<CategoryResponse> getCategoriesNames();
     @GET("random.php")
     Single<MealResponse> getRandomMeal();
@@ -28,11 +31,11 @@ interface MaMealService {
     @GET("filter.php")
     Single<MealResponse> getMealsByCategory(@Query("c") String category);
 
-    @GET("filter.php")
-    Single<MealResponse> getMealsByArea(@Query("a") String area);
+    @GET("filter.php?a")
+    Single<CountryResponse> getAreas();
 
-    @GET("filter.php")
-    Single<MealResponse> getMealsByIngredient(@Query("i") String ingredient);
+    @GET("filter.php?i")
+    Flowable<IngredientResponse> getIngredientsData();
 
     @GET("lookup.php")
     Single<MealResponse> getMealById(@Query("i") String mealId);

@@ -1,12 +1,13 @@
 package com.example.mameal.network;
 
 import com.example.mameal.home.model.CategoryWithMeals;
-import com.example.mameal.model.Category;
+import com.example.mameal.model.CategoryDataResponse;
 import com.example.mameal.model.CategoryResponse;
+import com.example.mameal.model.CountryResponse;
+import com.example.mameal.model.IngredientResponse;
 import com.example.mameal.model.Meal;
 import com.example.mameal.model.MealResponse;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Flowable;
@@ -41,6 +42,18 @@ public class MaMealRemoteDataSource {
         return maMealService.getAllMeals();
     }
 
+    public Single<CategoryDataResponse> getCategoriesWithDetails() {
+        return maMealService.getAllCategoriesData();
+    }
+
+    public Single<CountryResponse> getAreas() {
+        return maMealService.getAreas();
+    }
+
+    public Flowable<IngredientResponse> getIngredients() {
+        return maMealService.getIngredientsData();
+    }
+
     public Single<MealResponse> getDailyMeal() {
         return maMealService.getRandomMeal();
     }
@@ -73,9 +86,5 @@ public class MaMealRemoteDataSource {
                 .toList()
                 .toObservable();
     }
-
-
-
-
 
 }

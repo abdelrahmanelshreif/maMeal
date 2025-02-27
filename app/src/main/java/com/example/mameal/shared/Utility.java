@@ -13,6 +13,9 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.example.mameal.R;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Utility {
 
 
@@ -51,4 +54,43 @@ public class Utility {
                 .create()
                 .show();
     }
+
+    public static String buildFlagUrl(String strArea) {
+        Map<String, String> countryAbbreviations = new HashMap<>();
+
+        countryAbbreviations.put("American", "us");
+        countryAbbreviations.put("British", "gb");
+        countryAbbreviations.put("Canadian", "ca");
+        countryAbbreviations.put("Chinese", "cn");
+        countryAbbreviations.put("Croatian", "hr");
+        countryAbbreviations.put("Dutch", "nl");
+        countryAbbreviations.put("Egyptian", "eg");
+        countryAbbreviations.put("Filipino", "ph");
+        countryAbbreviations.put("French", "fr");
+        countryAbbreviations.put("Greek", "gr");
+        countryAbbreviations.put("Indian", "in");
+        countryAbbreviations.put("Irish", "ie");
+        countryAbbreviations.put("Italian", "it");
+        countryAbbreviations.put("Jamaican", "jm");
+        countryAbbreviations.put("Japanese", "jp");
+        countryAbbreviations.put("Kenyan", "ke");
+        countryAbbreviations.put("Malaysian", "my");
+        countryAbbreviations.put("Mexican", "mx");
+        countryAbbreviations.put("Moroccan", "ma");
+        countryAbbreviations.put("Norwegian", "no");
+        countryAbbreviations.put("Polish", "pl");
+        countryAbbreviations.put("Portuguese", "pt");
+        countryAbbreviations.put("Russian", "ru");
+        countryAbbreviations.put("Spanish", "es");
+        countryAbbreviations.put("Thai", "th");
+        countryAbbreviations.put("Tunisian", "tn");
+        countryAbbreviations.put("Turkish", "tr");
+        countryAbbreviations.put("Ukrainian", "ua");
+        countryAbbreviations.put("Uruguayan", "uy");
+        countryAbbreviations.put("Vietnamese", "vn");
+
+        String countryCode = countryAbbreviations.getOrDefault(strArea, "unknown");
+        return "https://www.themealdb.com/images/icons/flags/big/64/" + countryCode + ".png";
+    }
+
 }

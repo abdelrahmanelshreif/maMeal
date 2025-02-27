@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity(tableName = "meal_table")
-
 public class Meal {
 
     @NonNull

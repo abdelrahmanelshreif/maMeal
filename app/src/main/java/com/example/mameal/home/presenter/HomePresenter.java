@@ -65,4 +65,19 @@ public class HomePresenter {
         homeView.navigateToMealDescription(view, mealId);
 
     }
+
+    public void handleAddToFav(String mealId) {
+        Disposable disposable = maMealRepository.getMealById(mealId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .subscribe(
+                        meal -> maMealRepository.insert(meal)
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(() -> homeView.successAddingToFav("Successfully added to favourite")
+                                        , throwable -> homeView.showError("Error at Adding to Favourite")
+                                )
+                );
+        compositeDisposable.add(disposable);
+    }
 }

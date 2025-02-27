@@ -11,6 +11,7 @@ appcompat = "1.7.0"
 material = "1.12.0"
 activity = "1.10.0"
 constraintlayout = "2.2.0"
+materialVersion = "1.9.0"
 player = "1.2.2"
 retrofit = "2.11.0"
 googleGmsGoogleServices = "4.4.2"
@@ -40,6 +41,7 @@ junit-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+material-v190 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
 navigation-safe-args-gradle-plugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "navigationFragment" }
 player = { module = "com.google.android.youtube:player", version.ref = "player" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }

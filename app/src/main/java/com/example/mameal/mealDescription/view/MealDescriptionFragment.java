@@ -1,6 +1,7 @@
 package com.example.mameal.mealDescription.view;
 
 import android.annotation.SuppressLint;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.example.mameal.R;
 import com.example.mameal.db.MealsLocalDataSource;
 import com.example.mameal.mealDescription.model.Ingredient;
@@ -129,6 +133,22 @@ public class MealDescriptionFragment extends Fragment implements MealDescription
     private void setMealTextData(Meal meal) {
         mealTitle.setText(meal.getMealTitle());
         mealCategory.setText(meal.getMealCategory());
+        Glide.with(this)
+                .load(Utility.buildFlagUrl(meal.getMealArea()))
+                .placeholder(R.drawable.default_menu_image_placeholder)
+                .error(R.drawable.default_menu_image_placeholder)
+                .into(new CustomTarget<Drawable>() {
+                    @Override
+                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                        mealCategory.setCompoundDrawablesWithIntrinsicBounds(null, null, null, resource);
+                    }
+
+                    @Override
+                    public void onLoadCleared(@Nullable Drawable placeholder) {
+                        mealCategory.setCompoundDrawablesWithIntrinsicBounds(null, null, null, placeholder);
+                    }
+                });
+
         instructions.setText(mealDescriptionPresenter.getFormattedInstructions(meal));
     }
 

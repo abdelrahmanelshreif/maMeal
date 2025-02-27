@@ -104,6 +104,11 @@ public class HomeFragment extends Fragment implements HomeView, OnMealClickListe
         Navigation.findNavController(view).navigate(action);
     }
 
+    @Override
+    public void successAddingToFav(String message) {
+        Utility.showToast(getContext(),message);
+    }
+
 
     @Override
     public void onDestroyView() {
@@ -114,5 +119,10 @@ public class HomeFragment extends Fragment implements HomeView, OnMealClickListe
     @Override
     public void onClick(View view, String mealId) {
         homePresenter.handleMealsNavigation(view, mealId);
+    }
+
+    @Override
+    public void onAddToFav(String mealId) {
+        homePresenter.handleAddToFav(mealId);
     }
 }

@@ -46,6 +46,10 @@ public class MealByCategoryAdapter extends RecyclerView.Adapter<MealByCategoryAd
                 .error(R.drawable.default_menu_image_placeholder)
                 .into(holder.mealImage);
         holder.mealImage.setOnClickListener(v -> onMealClickListener.onClick(v, meal.getMealId()));
+        holder.mealAddToFav.setOnClickListener(v -> {
+            onMealClickListener.onAddToFav(meal.getMealId());
+            updateFavoriteIcon(holder.mealAddToFav , true);
+        });
 
     }
 
@@ -54,6 +58,14 @@ public class MealByCategoryAdapter extends RecyclerView.Adapter<MealByCategoryAd
         return values.size();
     }
 
+
+    private void updateFavoriteIcon(ImageView imageView, boolean isFavorite) {
+        if (isFavorite) {
+            imageView.setImageResource(R.drawable.filled_fav);
+        } else {
+            imageView.setImageResource(R.drawable.add_to_fav);
+        }
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
