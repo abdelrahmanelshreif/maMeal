@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.mameal.R;
-import com.example.mameal.authentication.view.OnMealClickListener;
 import com.example.mameal.model.Meal;
 
 import java.util.List;

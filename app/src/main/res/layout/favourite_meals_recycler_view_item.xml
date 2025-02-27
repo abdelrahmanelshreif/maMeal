@@ -25,7 +25,7 @@
             <ImageView
                 android:id="@+id/mealCardImgView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="300dp"
                 android:scaleType="fitXY"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -37,20 +37,20 @@
                 android:id="@+id/mealAddToFavBtn"
                 android:layout_width="30dp"
                 android:layout_height="28dp"
-                android:layout_marginStart="313dp"
-                android:layout_marginEnd="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/mealTitleCardTextViewCard"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.15"
-                app:srcCompat="@drawable/add_to_fav" />
+                app:layout_constraintHorizontal_bias="0.90"
+                app:srcCompat="@drawable/filled_fav" />
 
             <TextView
                 android:id="@+id/mealTitleCardTextViewCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_black"
+                android:background="#80000000"
                 android:gravity="start"
                 android:lines="1"
                 android:paddingStart="@dimen/InclusiveTextViewCardPadding"
@@ -71,6 +71,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
                 android:gravity="start"
+                android:background="#80000000"
+
                 android:lines="2"
                 android:paddingStart="16dp"
                 android:text="@string/meal_category"

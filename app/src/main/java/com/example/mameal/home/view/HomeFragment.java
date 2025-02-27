@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mameal.R;
-import com.example.mameal.authentication.view.OnMealClickListener;
 import com.example.mameal.home.model.CategoryWithMeals;
 import com.example.mameal.home.presenter.HomePresenter;
 import com.example.mameal.model.Meal;

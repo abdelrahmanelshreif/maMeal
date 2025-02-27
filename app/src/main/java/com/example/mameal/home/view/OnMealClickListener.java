@@ -1,4 +1,4 @@
-package com.example.mameal.authentication.view;
+package com.example.mameal.home.view;
 
 import android.view.View;
 

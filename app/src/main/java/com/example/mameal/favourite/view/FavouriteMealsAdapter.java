@@ -1,4 +1,4 @@
-package com.example.mameal.home.view;
+package com.example.mameal.favourite.view;
 
 
 import android.content.Context;
@@ -12,20 +12,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.mameal.R;
-import com.example.mameal.uiModel.MealUiModel;
+import com.example.mameal.model.Meal;
 
 import java.util.List;
 
-public class AllMealsAdapter extends RecyclerView.Adapter<AllMealsAdapter.ViewHolder> {
+public class FavouriteMealsAdapter extends RecyclerView.Adapter<FavouriteMealsAdapter.ViewHolder> {
 
 
     private final Context context;
-    private List<MealUiModel> values;
+    private List<Meal> values;
 
 
-    public AllMealsAdapter(Context context, List<MealUiModel> values) {
+    public FavouriteMealsAdapter(Context context, List<Meal> values) {
         this.context = context;
         this.values = values;
 
@@ -36,13 +35,13 @@ public class AllMealsAdapter extends RecyclerView.Adapter<AllMealsAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.recycler_row_meal, parent, false);
+        View view = layoutInflater.inflate(R.layout.favourite_meals_recycler_view_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        MealUiModel meal = values.get(position);
+        Meal meal = values.get(position);
         holder.mealTitle.setText(meal.getMealTitle());
         holder.mealCategory.setText(meal.getMealCategory());
         Glide.with(context)
@@ -63,7 +62,7 @@ public class AllMealsAdapter extends RecyclerView.Adapter<AllMealsAdapter.ViewHo
 
         public View layout;
         public TextView mealTitle, mealCategory;
-        public ImageView mealImage, mealAddToFav;
+        public ImageView mealImage, removeFromFav;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -72,7 +71,7 @@ public class AllMealsAdapter extends RecyclerView.Adapter<AllMealsAdapter.ViewHo
             mealTitle = itemView.findViewById(R.id.mealTitleCardTextViewCard);
             mealCategory = itemView.findViewById(R.id.mealCategoryCardTextView);
             mealImage = itemView.findViewById(R.id.mealCardImgView);
-            mealAddToFav = itemView.findViewById(R.id.mealAddToFavBtn);
+            removeFromFav = itemView.findViewById(R.id.mealAddToFavBtn);
 
         }
     }
