@@ -1,9 +1,8 @@
-package com.example.mameal.utils;
+package com.example.mameal.shared;
 
 import static android.widget.Toast.LENGTH_SHORT;
 
 import android.content.Context;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 

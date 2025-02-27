@@ -65,7 +65,23 @@ public class MealDescriptionPresenter implements MealDescriptionContract.Present
 
     @Override
     public String getFormattedInstructions(Meal meal) {
-        return meal.getMealInstructions().replace("\r\n" , "\n");
+        return meal.getMealInstructions().replace("\r\n", "\n");
+    }
+
+    @Override
+    public void addToFavourite(String mealId) {
+        Disposable disposable = maMealRepository.getMealById(mealId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .subscribe(
+                        meal -> maMealRepository.insert(meal)
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(() -> mealDescriptionView.successAddingToFav("Successfully added to favourite")
+                                        , throwable -> mealDescriptionView.showError("Error at Adding to Favourite")
+                                )
+                );
+        compositeDisposable.add(disposable);
     }
 
 

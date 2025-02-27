@@ -21,7 +21,7 @@ import com.example.mameal.authentication.view.OnMealClickListener;
 import com.example.mameal.home.model.CategoryWithMeals;
 import com.example.mameal.home.presenter.HomePresenter;
 import com.example.mameal.model.Meal;
-import com.example.mameal.utils.Utility;
+import com.example.mameal.shared.Utility;
 
 import java.util.List;
 

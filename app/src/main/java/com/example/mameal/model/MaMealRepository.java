@@ -6,6 +6,7 @@ import com.example.mameal.network.MaMealRemoteDataSource;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Single;
@@ -42,17 +43,28 @@ public class MaMealRepository {
         return maMealRemoteDataSource.getMealsByCategory(category);
     }
 
-    public Observable<List<CategoryWithMeals>> getCategoryWithMeals(){
+    public Observable<List<CategoryWithMeals>> getCategoryWithMeals() {
         return maMealRemoteDataSource.getCategoryWithMeals();
     }
 
-    public Single<MealResponse> getDailyMeal()
-    {
+    public Single<MealResponse> getDailyMeal() {
         return maMealRemoteDataSource.getDailyMeal();
     }
-    public Single<Meal> getMealById(String id){
+
+    public Single<Meal> getMealById(String id) {
         return maMealRemoteDataSource.getMealbyId(id);
     }
 
+    public Completable insert(Meal meal) {
+        return mealsLocalDataSource.insert(meal);
+    }
+
+    public Completable delete(Meal meal) {
+        return mealsLocalDataSource.delete(meal);
+    }
+
+    public Observable<List<Meal>> getFavouriteMeals() {
+        return mealsLocalDataSource.getStoredData();
+    }
 
 }

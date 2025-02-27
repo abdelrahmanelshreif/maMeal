@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 import com.example.mameal.R;
 import com.example.mameal.authentication.presenter.RegisterPresenter;
 import com.example.mameal.network.FirebaseServicesImpl;
-import com.example.mameal.utils.Utility;
+import com.example.mameal.shared.Utility;
 
 
 public class RegisterFragment extends Fragment implements RegisterView {

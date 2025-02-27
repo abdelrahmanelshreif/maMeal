@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface MealDescriptionContract {
     public interface View {
+        void successAddingToFav(String message);
         void setMealMainData(Meal meal);
         void showIngredients(List<Ingredient> ingredientList);
 
@@ -18,5 +19,7 @@ public interface MealDescriptionContract {
         void getIngredients(String mealId);
 
         String getFormattedInstructions(Meal meal);
+
+        void addToFavourite(String mealId);
     }
 }

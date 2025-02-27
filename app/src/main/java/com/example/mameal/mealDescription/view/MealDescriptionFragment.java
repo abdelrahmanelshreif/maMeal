@@ -2,7 +2,6 @@ package com.example.mameal.mealDescription.view;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,17 +19,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.mameal.R;
-import com.example.mameal.authentication.view.OnMealClickListener;
 import com.example.mameal.db.MealsLocalDataSource;
 import com.example.mameal.mealDescription.model.Ingredient;
 import com.example.mameal.mealDescription.presenter.MealDescriptionPresenter;
 import com.example.mameal.model.MaMealRepository;
 import com.example.mameal.model.Meal;
 import com.example.mameal.network.MaMealRemoteDataSource;
-import com.example.mameal.utils.Utility;
+import com.example.mameal.shared.Utility;
 import com.google.android.material.chip.Chip;
 
 import java.util.List;
@@ -67,6 +63,7 @@ public class MealDescriptionFragment extends Fragment implements MealDescription
         String mealId = MealDescriptionFragmentArgs.fromBundle(getArguments()).getMealId();
         mealDescriptionPresenter.getMealData(mealId);
         mealDescriptionPresenter.getIngredients(mealId);
+        addToFav.setOnClickListener(v -> mealDescriptionPresenter.addToFavourite(mealId));
     }
 
 
@@ -87,14 +84,11 @@ public class MealDescriptionFragment extends Fragment implements MealDescription
             ingredientChip.setChipBackgroundColorResource(R.color.white);
             ingredientChip.setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
             ingredientChip.setChipBackgroundColorResource(R.color.primary_100);
-
             procedureChip.setChipBackgroundColorResource(R.color.white);
             procedureChip.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary_80));
-
             ingredientRecyclerView.setVisibility(View.VISIBLE);
             instructionsLayout.setVisibility(View.GONE);
         });
-
         procedureChip.setOnClickListener(v -> {
             procedureChip.setChipBackgroundColorResource(R.color.primary_100);
             procedureChip.setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
@@ -119,10 +113,15 @@ public class MealDescriptionFragment extends Fragment implements MealDescription
     }
 
     @Override
+    public void successAddingToFav(String message) {
+        Utility.showToast(getContext(), message);
+        addToFav.setImageResource(R.drawable.filled_fav);
+    }
+
+    @Override
     public void setMealMainData(Meal meal) {
         setMealTextData(meal);
-        loadImage(meal.getMealThumb());
-
+        Utility.loadImage(this, meal.getMealThumb(), mealImg);
         loadYoutubeVideo(mealDescriptionPresenter.getFormattedYoutubeUrl(meal.getMealYoutube()));
     }
 
@@ -130,18 +129,9 @@ public class MealDescriptionFragment extends Fragment implements MealDescription
     private void setMealTextData(Meal meal) {
         mealTitle.setText(meal.getMealTitle());
         mealCategory.setText(meal.getMealCategory());
-        Log.i("TAG", "setMealTextData: "+meal.getMealInstructions());
         instructions.setText(mealDescriptionPresenter.getFormattedInstructions(meal));
     }
 
-    private void loadImage(String imageUrl) {
-        Glide.with(this)
-                .load(imageUrl)
-                .apply(new RequestOptions().override(700, 700))
-                .placeholder(R.drawable.default_menu_image_placeholder)
-                .error(R.drawable.default_menu_image_placeholder)
-                .into(mealImg);
-    }
 
     private void loadYoutubeVideo(String youtubeUrl) {
         setupWebView();
