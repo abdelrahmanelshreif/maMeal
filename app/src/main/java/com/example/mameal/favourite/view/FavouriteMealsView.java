@@ -8,4 +8,5 @@ public interface FavouriteMealsView {
     void showFavouriteMeals(List<Meal> meals);
     void showErrorRetrievingData(String error);
 
+    void successfulDeletion();
 }

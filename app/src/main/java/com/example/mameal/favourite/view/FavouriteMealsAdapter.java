@@ -2,6 +2,7 @@ package com.example.mameal.favourite.view;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,19 +15,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.mameal.R;
 import com.example.mameal.model.Meal;
+import com.example.mameal.shared.Utility;
 
 import java.util.List;
 
-public class FavouriteMealsAdapter extends RecyclerView.Adapter<FavouriteMealsAdapter.ViewHolder> {
+public class FavouriteMealsAdapter extends RecyclerView.Adapter<FavouriteMealsAdapter.ViewHolder> implements DialogInterface.OnClickListener {
 
 
     private final Context context;
     private List<Meal> values;
+    OnClickFavouriteItem onClickFavouriteItem;
 
+    Meal meal;
 
-    public FavouriteMealsAdapter(Context context, List<Meal> values) {
+    public FavouriteMealsAdapter(Context context, List<Meal> values, OnClickFavouriteItem onClickFavouriteItem) {
         this.context = context;
         this.values = values;
+        this.onClickFavouriteItem = onClickFavouriteItem;
 
 
     }
@@ -41,20 +46,34 @@ public class FavouriteMealsAdapter extends RecyclerView.Adapter<FavouriteMealsAd
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Meal meal = values.get(position);
+        meal = values.get(position);
         holder.mealTitle.setText(meal.getMealTitle());
         holder.mealCategory.setText(meal.getMealCategory());
         Glide.with(context)
-                .load(meal.getMealImgSource())
+                .load(meal.getMealThumb())
                 .placeholder(R.drawable.default_menu_image_placeholder)
                 .error(R.drawable.default_menu_image_placeholder)
                 .into(holder.mealImage);
 
+        holder.removeFromFav.setOnClickListener(v -> {
+            Utility.showConfirmationAlert(holder.itemView.getContext(),
+                    "Deletion Process",
+                    "Are you sure that you want to delete ?"
+                    , this
+            );
+        });
     }
 
     @Override
     public int getItemCount() {
         return values.size();
+    }
+
+    @Override
+    public void onClick(DialogInterface dialog, int which) {
+        if (which < 0) {
+            onClickFavouriteItem.removeFromFavourite(meal);
+        }
     }
 
 
@@ -72,6 +91,7 @@ public class FavouriteMealsAdapter extends RecyclerView.Adapter<FavouriteMealsAd
             mealCategory = itemView.findViewById(R.id.mealCategoryCardTextView);
             mealImage = itemView.findViewById(R.id.mealCardImgView);
             removeFromFav = itemView.findViewById(R.id.mealAddToFavBtn);
+
 
         }
     }

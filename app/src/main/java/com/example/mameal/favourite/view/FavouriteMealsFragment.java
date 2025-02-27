@@ -16,11 +16,12 @@ import com.example.mameal.favourite.presenter.FavouriteMealsPresenter;
 import com.example.mameal.home.view.MealByCategoryAdapter;
 import com.example.mameal.model.MaMealRepository;
 import com.example.mameal.model.Meal;
+import com.example.mameal.shared.Utility;
 
 import java.util.List;
 
 
-public class FavouriteMealsFragment extends Fragment implements FavouriteMealsView{
+public class FavouriteMealsFragment extends Fragment implements FavouriteMealsView,OnClickFavouriteItem{
 
     private RecyclerView recyclerView;
     MaMealRepository maMealRepository;
@@ -54,13 +55,30 @@ public class FavouriteMealsFragment extends Fragment implements FavouriteMealsVi
 
     @Override
     public void showFavouriteMeals(List<Meal> meals) {
-        FavouriteMealsAdapter adapter = new FavouriteMealsAdapter(getContext(), meals);
+        FavouriteMealsAdapter adapter = new FavouriteMealsAdapter(getContext(), meals,this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapter);
     }
 
     @Override
     public void showErrorRetrievingData(String error) {
+        Utility.showToast(getContext(), error);
+    }
 
+    @Override
+    public void onClickFavouriteMeal(String mealId) {
+
+
+    }
+
+    @Override
+    public void removeFromFavourite(Meal meal) {
+        favouriteMealsPresenter.removeMealFromFavourite(meal);
+
+    }
+
+    @Override
+    public void successfulDeletion() {
+        Utility.showToast(getContext(),"Successfully Removed");
     }
 }

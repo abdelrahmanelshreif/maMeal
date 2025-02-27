@@ -5,6 +5,7 @@ import android.content.Context;
 import com.example.mameal.db.MealsLocalDataSource;
 import com.example.mameal.favourite.view.FavouriteMealsView;
 import com.example.mameal.model.MaMealRepository;
+import com.example.mameal.model.Meal;
 import com.example.mameal.network.MaMealRemoteDataSource;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -32,5 +33,14 @@ public class FavouriteMealsPresenter {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(meals -> favouriteMealsView.showFavouriteMeals(meals));
         compositeDisposable.add(disposable);
+    }
+
+    public void removeMealFromFavourite(Meal meal) {
+        repository.delete(meal)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        () -> favouriteMealsView.successfulDeletion()
+                );
     }
 }
