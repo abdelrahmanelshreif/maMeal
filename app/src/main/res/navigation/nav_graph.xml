@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/searchFragment">
+    app:startDestination="@id/searchFragment3">
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.mameal.authentication.view.LoginFragment"
@@ -17,11 +17,6 @@
             app:destination="@id/homeFragment"
             app:popUpToInclusive="true" />
     </fragment>
-    <fragment
-        android:id="@+id/categoryFragment"
-        android:name="com.example.mameal.search.view.CategoryFragment"
-        android:label="fragment_category"
-        tools:layout="@layout/fragment_category" />
     <fragment
         android:id="@+id/favouriteMealsFragment"
         android:name="com.example.mameal.favourite.view.FavouriteMealsFragment"
@@ -68,16 +63,6 @@
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
-        android:id="@+id/countrySearchFragment"
-        android:name="com.example.mameal.search.view.CountrySearchFragment"
-        android:label="fragment_country_search"
-        tools:layout="@layout/fragment_country_search" />
-    <fragment
-        android:id="@+id/ingredientSearchFragment"
-        android:name="com.example.mameal.search.view.IngredientSearchFragment"
-        android:label="fragment_ingredient_search"
-        tools:layout="@layout/fragment_search" />
-    <fragment
         android:id="@+id/mealDescFragment"
         android:name="com.example.mameal.mealDescription.view.MealDescriptionFragment"
         android:label="fragment_meal_desc"
@@ -97,10 +82,38 @@
         <action
             android:id="@+id/action_profileFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_calenderFragment"
+            app:destination="@id/calenderFragment" />
     </fragment>
     <fragment
-        android:id="@+id/searchFragment"
+        android:id="@+id/calenderFragment"
+        android:name="com.example.mameal.calender.view.CalenderFragment"
+        android:label="fragment_calender"
+        tools:layout="@layout/fragment_calender" >
+        <action
+            android:id="@+id/action_calenderFragment_to_mealDescFragment"
+            app:destination="@id/mealDescFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment3"
         android:name="com.example.mameal.search.view.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment3_to_filteredMealsFragment"
+            app:destination="@id/filteredMealsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/filteredMealsFragment"
+        android:name="com.example.mameal.search.view.FilteredMealsFragment"
+        android:label="fragment_filtered_meals"
+        tools:layout="@layout/fragment_filtered_meals" >
+        <action
+            android:id="@+id/action_filteredMealsFragment_to_searchFragment3"
+            app:destination="@id/searchFragment3" />
+        <action
+            android:id="@+id/action_filteredMealsFragment_to_mealDescFragment"
+            app:destination="@id/mealDescFragment" />
+    </fragment>
 </navigation>

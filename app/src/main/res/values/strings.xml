@@ -65,4 +65,5 @@
     <string name="search_area_text">Search</string>
     <string name="country_name">Country</string>
     <string name="category_name">Category</string>
+    <string name="filtered_meals">Filtered Meals</string>
 </resources>
