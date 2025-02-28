@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,7 +32,10 @@ import java.util.List;
 public class SearchFragment extends Fragment implements SearchView, OnClickMealListener, OnIngredientClickListener, OnCountryClickListener, OnCategoryClickListener {
 
     private RecyclerView recyclerView;
+    private ProgressBar progressBar;
     private ChipGroup chipGroupFilter;
+
+    private String selectedFilter = "";
     SearchPresenter searchPresenter;
     TextInputEditText searchTextHolder;
     public static final String CATEGORY = "Category";
@@ -54,8 +58,10 @@ public class SearchFragment extends Fragment implements SearchView, OnClickMealL
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setupUiComponent(view);
-        setupFilterChips();
         searchPresenter.getAllMeals();
+        /* WARNING */
+        // The Setup of Filter Chips Should be here After getAllMeals not before..
+        setupFilterChips();
         searchTextHolder.addTextChangedListener(getWatcher());
 
 
@@ -81,6 +87,7 @@ public class SearchFragment extends Fragment implements SearchView, OnClickMealL
     }
 
     private void switchRecyclerView(String selectedFilter) {
+        this.selectedFilter = selectedFilter;
         switch (selectedFilter) {
             case CATEGORY:
                 searchPresenter.getCategoriesData();
@@ -105,7 +112,7 @@ public class SearchFragment extends Fragment implements SearchView, OnClickMealL
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                searchPresenter.observeSearch(s.toString());
+                searchPresenter.observeSearch(s.toString(), selectedFilter);
 
             }
 
@@ -120,10 +127,12 @@ public class SearchFragment extends Fragment implements SearchView, OnClickMealL
         searchTextHolder = view.findViewById(R.id.searchTextHolder);
         recyclerView = view.findViewById(R.id.searchResultRecyclerView);
         chipGroupFilter = view.findViewById(R.id.chipsGroupFilter);
+        progressBar = view.findViewById(R.id.progressBarRecyclerViewSearchFragment);
     }
 
     @Override
     public void showAllMeals(List<Meal> meals) {
+        this.selectedFilter = "";
         MealsAdapter mealsAdapter = new MealsAdapter(requireContext(), meals, this);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(gridLayoutManager);
@@ -154,6 +163,17 @@ public class SearchFragment extends Fragment implements SearchView, OnClickMealL
         recyclerView.setAdapter(ingredientsAdapter);
 
     }
+
+    @Override
+    public void showLoading() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoading() {
+        progressBar.setVisibility(View.GONE);
+    }
+
     @Override
     public void showError(String message) {
         Utility.showToast(requireContext(), message);
