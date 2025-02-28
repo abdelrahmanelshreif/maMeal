@@ -71,6 +71,7 @@
             android:id="@+id/chipsGroupFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:singleSelection="true"
             android:layout_marginTop="16dp"
             app:chipSpacing="8dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -79,29 +80,32 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip"
+                android:background="@color/grey_4"
                 android:checkable="true"
+                style="@style/Widget.Material3.Chip.Filter.Elevated"
                 android:elevation="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/grey_4"
                 android:text="@string/category" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip2"
+                android:background="@color/grey_4"
                 android:checkable="true"
+                style="@style/Widget.Material3.Chip.Filter.Elevated"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:elevation="5dp"
-                android:backgroundTint="@color/grey_4"
                 android:text="@string/country" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip3"
+                android:background="@color/grey_4"
                 android:checkable="true"
+                style="@style/Widget.Material3.Chip.Filter.Elevated"
                 android:elevation="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/grey_4"
                 android:text="@string/ingredient" />
         </com.google.android.material.chip.ChipGroup>
 
@@ -109,6 +113,7 @@
             android:id="@+id/searchResultRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            style="@style/Widget.Material3.Chip.Filter.Elevated"
             android:layout_marginTop="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

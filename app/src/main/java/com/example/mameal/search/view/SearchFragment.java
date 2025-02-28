@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -65,8 +66,12 @@ public class SearchFragment extends Fragment implements SearchView, OnClickMealL
             Chip chip = (Chip) chipGroupFilter.getChildAt(i);
             chip.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 if (isChecked) {
-                    Log.i("TAG", "Chip clicked: " + buttonView.getText().toString());
+                    chip.setChipBackgroundColorResource((R.color.primary_100));
                     switchRecyclerView(buttonView.getText().toString());
+                }
+                else{
+                    chip.setChipBackgroundColorResource((R.color.grey_4));
+
                 }
             });
         }
