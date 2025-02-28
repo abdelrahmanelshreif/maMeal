@@ -66,11 +66,14 @@ public class SearchFragment extends Fragment implements SearchView, OnClickMealL
             Chip chip = (Chip) chipGroupFilter.getChildAt(i);
             chip.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 if (isChecked) {
-                    chip.setChipBackgroundColorResource((R.color.primary_100));
+                    chip.setChipBackgroundColorResource(R.color.primary_100);
+                    chip.setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
                     switchRecyclerView(buttonView.getText().toString());
                 }
                 else{
-                    chip.setChipBackgroundColorResource((R.color.grey_4));
+                    chip.setChipBackgroundColorResource(R.color.white);
+                    chip.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary_80));
+
 
                 }
             });

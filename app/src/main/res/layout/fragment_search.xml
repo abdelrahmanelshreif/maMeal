@@ -70,6 +70,7 @@
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipsGroupFilter"
             android:layout_width="wrap_content"
+            android:padding="8dp"
             android:layout_height="wrap_content"
             app:singleSelection="true"
             android:layout_marginTop="16dp"
@@ -80,18 +81,21 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip"
-                android:background="@color/grey_4"
-                android:checkable="true"
+                android:textColor="@color/primary_80"                android:checkable="true"
+                android:focusable="true"
                 style="@style/Widget.Material3.Chip.Filter.Elevated"
                 android:elevation="5dp"
+                app:chipBackgroundColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/category" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip2"
-                android:background="@color/grey_4"
+                android:textColor="@color/primary_80"
                 android:checkable="true"
+                android:focusable="true"
+                app:chipBackgroundColor="@color/white"
                 style="@style/Widget.Material3.Chip.Filter.Elevated"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -100,8 +104,10 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip3"
-                android:background="@color/grey_4"
+                android:textColor="@color/primary_80"
+                android:focusable="true"
                 android:checkable="true"
+                app:chipBackgroundColor="@color/white"
                 style="@style/Widget.Material3.Chip.Filter.Elevated"
                 android:elevation="5dp"
                 android:layout_width="wrap_content"
