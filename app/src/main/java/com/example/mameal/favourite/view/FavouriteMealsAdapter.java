@@ -19,14 +19,13 @@ import com.example.mameal.shared.Utility;
 
 import java.util.List;
 
-public class FavouriteMealsAdapter extends RecyclerView.Adapter<FavouriteMealsAdapter.ViewHolder> implements DialogInterface.OnClickListener {
+public class FavouriteMealsAdapter extends RecyclerView.Adapter<FavouriteMealsAdapter.ViewHolder> {
 
 
     private final Context context;
     private List<Meal> values;
     OnClickFavouriteItem onClickFavouriteItem;
 
-    Meal meal;
 
     public FavouriteMealsAdapter(Context context, List<Meal> values, OnClickFavouriteItem onClickFavouriteItem) {
         this.context = context;
@@ -46,7 +45,7 @@ public class FavouriteMealsAdapter extends RecyclerView.Adapter<FavouriteMealsAd
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        meal = values.get(position);
+        Meal meal = values.get(position);
         holder.mealTitle.setText(meal.getMealTitle());
         holder.mealCategory.setText(meal.getMealCategory());
         Glide.with(context)
@@ -57,9 +56,13 @@ public class FavouriteMealsAdapter extends RecyclerView.Adapter<FavouriteMealsAd
 
         holder.removeFromFav.setOnClickListener(v -> {
             Utility.showConfirmationAlert(holder.itemView.getContext(),
-                    "Deletion Process",
-                    "Are you sure that you want to delete ?"
-                    , this
+                    "Warning",
+                    "Are you sure that you want to delete?",
+                    (dialog, which) -> {
+                        if (which == DialogInterface.BUTTON_POSITIVE) {
+                            onClickFavouriteItem.removeFromFavourite(meal);
+                        }
+                    }
             );
         });
     }
@@ -67,13 +70,6 @@ public class FavouriteMealsAdapter extends RecyclerView.Adapter<FavouriteMealsAd
     @Override
     public int getItemCount() {
         return values.size();
-    }
-
-    @Override
-    public void onClick(DialogInterface dialog, int which) {
-        if (which < 0) {
-            onClickFavouriteItem.removeFromFavourite(meal);
-        }
     }
 
 
