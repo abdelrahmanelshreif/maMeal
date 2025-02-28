@@ -48,6 +48,10 @@ public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.ViewHolder> 
                 .into(holder.mealImg);
     }
 
+    public void updateList(List<Meal> values){
+        this.values = values;
+        notifyDataSetChanged();
+    }
     @Override
     public int getItemCount() {
         return values.size();
