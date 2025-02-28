@@ -100,7 +100,8 @@ public class HomeFragment extends Fragment implements HomeView, OnMealClickListe
 
     @Override
     public void navigateToMealDescription(View view, String mealId) {
-        com.example.mameal.home.view.HomeFragmentDirections.ActionHomeFragmentToMealDescFragment action = HomeFragmentDirections.actionHomeFragmentToMealDescFragment(mealId);
+        com.example.mameal.home.view.HomeFragmentDirections.
+                ActionHomeFragmentToMealDescFragment action = HomeFragmentDirections.actionHomeFragmentToMealDescFragment(mealId);
         Navigation.findNavController(view).navigate(action);
     }
 

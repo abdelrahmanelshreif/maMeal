@@ -22,12 +22,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     private List<Category> values;
 
-    OnCategoryClickListener onCategoryClickListener;
+    OnFilteredClickListener onClickListener;
 
-    public CategoryAdapter(Context context, List<Category> values, OnCategoryClickListener onCategoryClickListener) {
+    public CategoryAdapter(Context context, List<Category> values, OnFilteredClickListener onClickListener) {
         this.context = context;
         this.values = values;
-        this.onCategoryClickListener = onCategoryClickListener;
+        this.onClickListener = onClickListener;
     }
 
 
@@ -48,6 +48,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                 .placeholder(R.drawable.default_menu_image_placeholder)
                 .error(R.drawable.default_menu_image_placeholder)
                 .into(holder.categoryImage);
+        holder.categoryImage.setOnClickListener(v -> onClickListener.navigateToFilteredMealsFragment(v,SearchView.CATEGORY,category.getStrCategory()));
     }
 
     @Override

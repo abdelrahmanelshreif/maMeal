@@ -1,4 +1,4 @@
-package com.example.mameal.search.view;
+package com.example.mameal.filteredMeals.view;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -16,29 +16,31 @@ import com.example.mameal.model.Meal;
 
 import java.util.List;
 
-public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.ViewHolder> {
+
+
+public class FilteredMealsAdapter extends RecyclerView.Adapter<FilteredMealsAdapter.ViewHolder> {
     private final Context context;
     private List<Meal> values;
 
-    private OnClickMealListener onClickMealListener;
+    private OnFilteredMealClickListenerAtFilterFragment onMealClickListener;
 
-    public MealsAdapter(Context context, List<Meal> values, OnClickMealListener onClickMealListener) {
+    public FilteredMealsAdapter(Context context, List<Meal> values, OnFilteredMealClickListenerAtFilterFragment onMealClickListener) {
         this.context = context;
         this.values = values;
-        this.onClickMealListener = onClickMealListener;
+        this.onMealClickListener = onMealClickListener;
     }
 
 
     @NonNull
     @Override
-    public MealsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public FilteredMealsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.grid_meal_item_search_fragment, parent, false);
-        return new MealsAdapter.ViewHolder(view);
+        return new FilteredMealsAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MealsAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull FilteredMealsAdapter.ViewHolder holder, int position) {
         Meal meal = values.get(position);
         holder.mealTitle.setText(meal.getMealTitle());
         Glide.with(context)
@@ -46,7 +48,7 @@ public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.ViewHolder> 
                 .placeholder(R.drawable.default_menu_image_placeholder)
                 .error(R.drawable.default_menu_image_placeholder)
                 .into(holder.mealImg);
-        holder.mealImg.setOnClickListener(v -> onClickMealListener.navigateToMealDescription(v, meal.getMealId()));
+        holder.mealImg.setOnClickListener(v -> onMealClickListener.navigateToMealDescription(v, meal.getMealId()));
     }
 
     public void updateList(List<Meal> values) {
@@ -73,4 +75,5 @@ public class MealsAdapter extends RecyclerView.Adapter<MealsAdapter.ViewHolder> 
 
         }
     }
+
 }

@@ -117,60 +117,6 @@ public class SearchPresenter {
         compositeDisposable.add(disposable);
     }
 
-    public void getMealsFilteredByCategory(String category) {
-        Disposable disposable = repository.getAllMealsData()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .map(MealResponse::getMeals)
-                .flatMapIterable(meals -> meals)
-                .filter(meal -> meal.getMealCategory().equals(category)
-                ).toList()
-                .subscribe(
-                        meals -> searchView.showMealsFilteredByCategory(meals),
-                        throwable -> searchView.showError(throwable.getMessage())
-                );
-        compositeDisposable.add(disposable);
-    }
-
-    public void getMealsFilteredByIngredients(String ingredient) {
-        // getting all meals
-        // then filter it if the ingredients any match with strIngredient
-        // show meals that matches the required ingredient
-        Disposable disposable = repository.getAllMealsData()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .map(MealResponse::getMeals)
-                .flatMapIterable(meals -> meals)
-                .filter(meal -> {
-
-                    for (String tempIngredient : meal.getIngredients()) {
-                        if (tempIngredient.equals(ingredient))
-                            return true;
-                    }
-                    return false;
-                }).toList()
-                .subscribe(
-                        meals -> searchView.showMealsFilteredByIngredient(meals),
-                        throwable -> searchView.showError(throwable.getMessage())
-                );
-        compositeDisposable.add(disposable);
-    }
-
-    public void getMealsFilteredByCountry(String country) {
-        Disposable disposable = repository.getAllMealsData()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .map(MealResponse::getMeals)
-                .flatMapIterable(meals -> meals)
-                .filter(meal -> meal.getMealArea().equals(country)
-                ).toList()
-                .subscribe(
-                        meals -> searchView.showMealsFilteredByCountry(meals),
-                        throwable -> searchView.showError(throwable.getMessage())
-                );
-        compositeDisposable.add(disposable);
-    }
-
     public void observeSearch(String query, String selectedFilter) {
         searchView.showLoading();
         if (query.isEmpty()) {
@@ -210,7 +156,3 @@ public class SearchPresenter {
         searchView.hideLoading();
     }
 }
-
-
-
-

@@ -3,7 +3,6 @@ package com.example.mameal.search.view;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,12 +29,11 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
 
-public class SearchFragment extends Fragment implements SearchView, OnClickMealListener, OnIngredientClickListener, OnCountryClickListener, OnCategoryClickListener {
+public class SearchFragment extends Fragment implements SearchView, OnFilteredClickListener, OnClickMealListener {
 
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
     private ChipGroup chipGroupFilter;
-
     private String selectedFilter = "";
     SearchPresenter searchPresenter;
     TextInputEditText searchTextHolder;
@@ -75,8 +74,7 @@ public class SearchFragment extends Fragment implements SearchView, OnClickMealL
                     chip.setChipBackgroundColorResource(R.color.primary_100);
                     chip.setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
                     switchRecyclerView(buttonView.getText().toString());
-                }
-                else{
+                } else {
                     chip.setChipBackgroundColorResource(R.color.white);
                     chip.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary_80));
 
@@ -166,11 +164,13 @@ public class SearchFragment extends Fragment implements SearchView, OnClickMealL
 
     @Override
     public void showLoading() {
+        recyclerView.setVisibility(View.GONE);
         progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
+        recyclerView.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.GONE);
     }
 
@@ -179,20 +179,17 @@ public class SearchFragment extends Fragment implements SearchView, OnClickMealL
         Utility.showToast(requireContext(), message);
     }
 
+
     @Override
-    public void showMealsFilteredByIngredient(List<Meal> meals) {
+    public void navigateToFilteredMealsFragment(View view, String type, String title) {
+        SearchFragmentDirections.ActionSearchFragment3ToFilteredMealsFragment action = SearchFragmentDirections.actionSearchFragment3ToFilteredMealsFragment(selectedFilter, title);
+        Navigation.findNavController(view).navigate(action);
 
     }
 
     @Override
-    public void showMealsFilteredByCountry(List<Meal> meals) {
-
+    public void navigateToMealDescription(View view, String mealId) {
+        SearchFragmentDirections.ActionSearchFragmentToMealDescFragment action = SearchFragmentDirections.actionSearchFragmentToMealDescFragment(mealId);
+        Navigation.findNavController(view).navigate(action);
     }
-
-    @Override
-    public void showMealsFilteredByCategory(List<Meal> meals) {
-
-    }
-
-
 }

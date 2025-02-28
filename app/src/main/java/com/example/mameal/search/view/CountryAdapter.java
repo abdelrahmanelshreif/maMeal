@@ -21,12 +21,12 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
     private final Context context;
     private List<Country> values;
 
-    private OnCountryClickListener onCountryClickListener;
+    private OnFilteredClickListener onClickListener;
 
-    public CountryAdapter(Context context, List<Country> values, OnCountryClickListener onCountryClickListener) {
+    public CountryAdapter(Context context, List<Country> values, OnFilteredClickListener onClickListener) {
         this.context = context;
         this.values = values;
-        this.onCountryClickListener = onCountryClickListener;
+        this.onClickListener = onClickListener;
     }
 
 
@@ -47,6 +47,8 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
                 .placeholder(R.drawable.default_menu_image_placeholder)
                 .error(R.drawable.default_menu_image_placeholder)
                 .into(holder.countryImage);
+
+        holder.countryImage.setOnClickListener(v -> onClickListener.navigateToFilteredMealsFragment(v,SearchView.COUNTRY,country.getStrArea()));
 
     }
 

@@ -31,7 +31,9 @@ public class MainActivity extends AppCompatActivity {
             if (destination.getId() == R.id.splashScreenFragment
                     || destination.getId() == R.id.loginFragment
                     || destination.getId() == R.id.registerFragment
-                    || destination.getId() == R.id.mealDescFragment) {
+                    || destination.getId() == R.id.mealDescFragment
+                    || destination.getId() == R.id.filteredMealsFragment
+            ) {
 
                 bottomNavigationView.setVisibility(View.GONE);
                 findViewById(R.id.fragmentContainerView).setPadding(0, 0, 0, 0);
