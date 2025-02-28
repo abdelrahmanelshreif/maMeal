@@ -1,6 +1,8 @@
 package com.example.mameal.search.view;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,12 +10,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.example.mameal.R;
 import com.example.mameal.model.Ingredient;
 import com.example.mameal.model.Meal;
+import com.example.mameal.shared.Utility;
 
 import java.util.List;
 
@@ -41,15 +50,16 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Ingredient ingredient = values.get(position);
+        Log.i("TAG", "onBindViewHolder: "+ingredient.getStrIngredient());
         holder.ingredientTitle.setText(ingredient.getStrIngredient());
         Glide.with(context)
-                .load(ingredient.getIngThumbnail())
+                .load(Utility.ingredientThumbGenerator(ingredient.getStrIngredient()))
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .placeholder(R.drawable.default_menu_image_placeholder)
                 .error(R.drawable.default_menu_image_placeholder)
                 .into(holder.ingredientImage);
 
     }
-
     @Override
     public int getItemCount() {
         return values.size();
@@ -63,8 +73,8 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.Vi
         public ViewHolder(View itemView) {
             super(itemView);
             this.layout = itemView;
-            ingredientTitle = itemView.findViewById(R.id.ingredientTitleTextView);
-            ingredientImage = itemView.findViewById(R.id.ingredientImgView);
+            ingredientTitle = itemView.findViewById(R.id.ingredientTitleSearchFragment);
+            ingredientImage = itemView.findViewById(R.id.ingredientImgSearchFragment);
         }
     }
 }

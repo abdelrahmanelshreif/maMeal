@@ -22,11 +22,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     private List<Category> values;
 
-    OnCategoryClickListener onClickCategoryItem;
+    OnCategoryClickListener onCategoryClickListener;
 
-    public CategoryAdapter(Context context, List<Category> values) {
+    public CategoryAdapter(Context context, List<Category> values, OnCategoryClickListener onCategoryClickListener) {
         this.context = context;
         this.values = values;
+        this.onCategoryClickListener = onCategoryClickListener;
     }
 
 

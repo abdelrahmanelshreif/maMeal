@@ -19,8 +19,8 @@ import java.util.Map;
 public class Utility {
 
 
-    public static void showToast(Context context , String text){
-        Toast.makeText(context,text, LENGTH_SHORT).show();
+    public static void showToast(Context context, String text) {
+        Toast.makeText(context, text, LENGTH_SHORT).show();
     }
 
     public static void loadImage(Fragment fragment, String imageUrl, ImageView imageHolder) {
@@ -91,6 +91,14 @@ public class Utility {
 
         String countryCode = countryAbbreviations.getOrDefault(strArea, "unknown");
         return "https://www.themealdb.com/images/icons/flags/big/64/" + countryCode + ".png";
+
+    }
+
+
+    public static String ingredientThumbGenerator(String ingredientTitle) {
+        String formattedIngredientName = ingredientTitle.replace(" " , "%20");
+        return "http://www.themealdb.com/images/ingredients/" + formattedIngredientName + "-Small.png";
+
     }
 
 }

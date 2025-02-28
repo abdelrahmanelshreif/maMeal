@@ -31,10 +31,10 @@ interface MaMealService {
     @GET("filter.php")
     Single<MealResponse> getMealsByCategory(@Query("c") String category);
 
-    @GET("filter.php?a")
+    @GET("list.php?a=list")
     Single<CountryResponse> getAreas();
 
-    @GET("filter.php?i")
+    @GET("list.php?i=list")
     Flowable<IngredientResponse> getIngredientsData();
 
     @GET("lookup.php")

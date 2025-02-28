@@ -79,6 +79,8 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip"
+                android:checkable="true"
+                android:elevation="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/grey_4"
@@ -86,13 +88,17 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip2"
+                android:checkable="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:elevation="5dp"
                 android:backgroundTint="@color/grey_4"
                 android:text="@string/country" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip3"
+                android:checkable="true"
+                android:elevation="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/grey_4"
