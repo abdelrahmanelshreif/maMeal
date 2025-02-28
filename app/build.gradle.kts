@@ -38,6 +38,7 @@ android {
 
 dependencies {
     implementation (libs.material.v190)
+    implementation (libs.lottie)
     implementation(libs.retrofit)
     testImplementation(platform(libs.junit.bom))
     testImplementation(libs.junit.jupiter)

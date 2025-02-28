@@ -14,7 +14,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.example.mameal.R;
 
 public class SplashScreenFragment extends Fragment {
-    private static final int SPLASH_DISPLAY_LENGTH = 2000;
+    private static final int SPLASH_DISPLAY_LENGTH = 3000;
 
     public SplashScreenFragment() {
     }
@@ -31,7 +31,7 @@ public class SplashScreenFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         new Handler().postDelayed(() -> {
             NavHostFragment.findNavController(this)
-                    .navigate(R.id.action_splashScreenFragment_to_homeFragment);
+                    .navigate(R.id.action_splashScreenFragment_to_loginFragment);
         }, SPLASH_DISPLAY_LENGTH);
     }
 

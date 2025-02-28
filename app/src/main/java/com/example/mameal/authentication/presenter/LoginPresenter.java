@@ -41,6 +41,7 @@ public class LoginPresenter implements AuthenticationCallback {
 
     @Override
     public void onSuccess() {
+
         loginView.showLoginSuccess();
     }
 
