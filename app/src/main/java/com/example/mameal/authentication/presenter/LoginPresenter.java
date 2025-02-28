@@ -5,10 +5,16 @@ import android.util.Patterns;
 import com.example.mameal.authentication.view.LoginView;
 import com.example.mameal.network.AuthenticationCallback;
 import com.example.mameal.network.FirebaseServices;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseUser;
+
 
 public class LoginPresenter implements AuthenticationCallback {
 
     private LoginView loginView;
+
     private FirebaseServices firebaseServices;
 
     public LoginPresenter(LoginView loginView, FirebaseServices firebaseServices) {
@@ -39,9 +45,42 @@ public class LoginPresenter implements AuthenticationCallback {
         return true;
     }
 
-    @Override
-    public void onSuccess() {
+    public void initiateGoogleSignIn() {
+        loginView.launchGoogleSignIn();
+    }
 
+    public void handleGoogleSignInResult(Task<GoogleSignInAccount> task)  {
+        GoogleSignInAccount account = null;
+        try {
+            account = task.getResult(ApiException.class);
+        } catch (ApiException e) {
+            loginView.showLoginError("Error At Google Sign in");
+        }
+        if (account == null) {
+            loginView.onGoogleSignInFailure("Google Sign-In failed: Account is null");
+            return;
+        }
+        String idToken = account.getIdToken();
+        if (idToken != null) {
+            firebaseServices.signInWithGoogle(idToken, new AuthenticationCallback() {
+                @Override
+                public void onSuccess(FirebaseUser user) {
+                    loginView.onGoogleSignInSuccess(user);
+                }
+
+                @Override
+                public void onFailure(String errorMessage) {
+                    loginView.onGoogleSignInFailure(errorMessage);
+                }
+            });
+        } else {
+            loginView.onGoogleSignInFailure("Google Sign-In failed: ID token is null");
+        }
+
+    }
+
+    @Override
+    public void onSuccess(FirebaseUser user) {
         loginView.showLoginSuccess();
     }
 

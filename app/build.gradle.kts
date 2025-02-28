@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.example.mameal"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.mameal"
@@ -14,10 +14,8 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -37,32 +35,47 @@ android {
 }
 
 dependencies {
-    implementation (libs.material.v190)
-    implementation (libs.lottie)
+
+    implementation(libs.appcompat)
+    implementation(libs.activity)
+    implementation(libs.constraintlayout)
+    implementation(libs.legacy.support.v4)
+    implementation(libs.annotation)
+
+    implementation(libs.material.v1110)
+    implementation(libs.lottie)
+
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
+
+    // Firebase
+    implementation(platform("com.google.firebase:firebase-bom:32.7.2"))
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-firestore")
+
+    // Google Sign-In
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
+    implementation(libs.credentials)
+    implementation(libs.googleid)
+
     implementation(libs.retrofit)
-    testImplementation(platform(libs.junit.bom))
-    testImplementation(libs.junit.jupiter)
-    implementation(libs.adapter.rxjava3)
-    implementation(libs.rxjava)
-    implementation(libs.room.rxjava3)
-    implementation(libs.rxandroid)
     implementation(libs.converter.gson)
     implementation(libs.gson)
     implementation(libs.glide)
-    implementation(libs.appcompat)
-    implementation(libs.material)
-    implementation(libs.activity)
-    implementation(libs.constraintlayout)
-    implementation(libs.firebase.auth)
-    implementation(libs.navigation.fragment)
-    implementation(libs.navigation.ui)
+
+    implementation(libs.adapter.rxjava3)
+    implementation(libs.rxjava)
+    implementation(libs.rxandroid)
+
     implementation(libs.room.common)
+    implementation(libs.room.rxjava3)
     annotationProcessor("androidx.room:room-compiler:${libs.versions.roomCommon.get()}")
-    implementation(libs.legacy.support.v4)
-    implementation(libs.firebase.firestore)
-    implementation(libs.annotation)
+
     implementation(libs.lifecycle.livedata.ktx)
     implementation(libs.lifecycle.viewmodel.ktx)
+
+    testImplementation(platform(libs.junit.bom))
+    testImplementation(libs.junit.jupiter)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

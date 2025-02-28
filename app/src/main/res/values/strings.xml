@@ -66,4 +66,5 @@
     <string name="country_name">Country</string>
     <string name="category_name">Category</string>
     <string name="filtered_meals">Filtered Meals</string>
+    <string name="default_web_client_id">139518798108-p6gsgvj9f2gavso8i2it6hev1a7c30fk.apps.googleusercontent.com</string>
 </resources>
