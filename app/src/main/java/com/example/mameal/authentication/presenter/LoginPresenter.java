@@ -2,6 +2,8 @@ package com.example.mameal.authentication.presenter;
 
 import android.util.Patterns;
 
+import androidx.navigation.Navigation;
+
 import com.example.mameal.authentication.view.LoginView;
 import com.example.mameal.network.AuthenticationCallback;
 import com.example.mameal.network.FirebaseServices;
@@ -87,5 +89,9 @@ public class LoginPresenter implements AuthenticationCallback {
     @Override
     public void onFailure(String errorMessage) {
         loginView.showLoginError(errorMessage);
+    }
+
+    public void register() {
+        loginView.NavigateRegisterScreen();
     }
 }

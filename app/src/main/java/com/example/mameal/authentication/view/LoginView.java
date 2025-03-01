@@ -12,4 +12,5 @@ public interface LoginView {
     void onGoogleSignInSuccess(FirebaseUser user);
     void onGoogleSignInFailure(String errorMessage);
 
+    void NavigateRegisterScreen();
 }

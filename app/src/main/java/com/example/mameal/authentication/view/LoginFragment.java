@@ -34,7 +34,7 @@ public class LoginFragment extends Fragment implements LoginView {
     TextView register_Btn, forget_password_btn;
     ImageView google_signin_btn;
     EditText emailEditText, passwordEditText;
-    Button signin_btn;
+    Button signin_btn, guest_mode_btn;
     LoginPresenter loginPresenter;
     private ActivityResultLauncher<Intent> googleSignInLauncher;
 
@@ -71,12 +71,18 @@ public class LoginFragment extends Fragment implements LoginView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setupUiComponent(view);
+
         loginPresenter = new LoginPresenter(this, new FirebaseServicesImpl());
-        signin_btn.setOnClickListener(v -> {
-            loginUser();
-        });
+
+        guest_mode_btn.setOnClickListener(v -> setGuest());
+        register_Btn.setOnClickListener(v -> loginPresenter.register());
+        signin_btn.setOnClickListener(v -> loginUser());
         google_signin_btn.setOnClickListener(v -> loginPresenter.initiateGoogleSignIn());
 
+    }
+
+    private void setGuest() {
+        Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_homeFragment);
     }
 
 
@@ -87,6 +93,7 @@ public class LoginFragment extends Fragment implements LoginView {
         google_signin_btn = view.findViewById(R.id.google_signin_img_view_btn);
         emailEditText = view.findViewById(R.id.email_edit_text);
         passwordEditText = view.findViewById(R.id.password_edit_text);
+        guest_mode_btn = view.findViewById(R.id.guest_mode_btn);
     }
 
     private void loginUser() {
@@ -138,5 +145,10 @@ public class LoginFragment extends Fragment implements LoginView {
     @Override
     public void onGoogleSignInFailure(String errorMessage) {
         Utility.showToast(requireContext(), errorMessage);
+    }
+
+    @Override
+    public void NavigateRegisterScreen() {
+        Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_registerFragment);
     }
 }
