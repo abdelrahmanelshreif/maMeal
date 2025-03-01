@@ -53,13 +53,29 @@
                     app:srcCompat="@drawable/add_to_fav" />
 
                 <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:src="@drawable/back_mod4"
+                    android:id="@+id/addToCalender"
+                    android:layout_width="40dp"
+                    android:layout_height="38dp"
+                    android:backgroundTint="@color/white"
+                    android:src="@drawable/add_to_calender"
+                    app:layout_constraintVertical_bias="0.9"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/backgroundColor_helper"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="3"
+                    android:background="#30000000"
+                    app:layout_constraintBottom_toBottomOf="@+id/mealCardImgView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintVertical_bias="0.93"
+
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
