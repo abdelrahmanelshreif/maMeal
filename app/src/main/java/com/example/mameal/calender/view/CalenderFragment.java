@@ -75,7 +75,7 @@ public class CalenderFragment extends Fragment implements CalenderContract.View 
     public void showMealOfEvent(List<Meal> meals) {
         Log.d("CalenderFragment", "Meals received: " + meals.size());
         PlannedMealsAdapter adapter = new PlannedMealsAdapter(getContext(), meals, this);
-        plannedMealsRecyclerView.setLayoutManager(new GridLayoutManager(getContext(),2,GridLayoutManager.VERTICAL, false));
+        plannedMealsRecyclerView.setLayoutManager(new GridLayoutManager(getContext(),1,GridLayoutManager.VERTICAL, false));
         plannedMealsRecyclerView.setAdapter(adapter);
 
     }

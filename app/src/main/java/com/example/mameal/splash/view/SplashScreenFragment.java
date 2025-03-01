@@ -43,12 +43,17 @@ public class SplashScreenFragment extends Fragment implements SplashScreenView {
 
     @Override
     public void navigateToHome() {
-        Navigation.findNavController(requireView()).navigate(R.id.action_splashScreenFragment_to_homeFragment);
+        View view = getView();
+        if (isAdded() && view != null) {
+            Navigation.findNavController(view).navigate(R.id.action_splashScreenFragment_to_homeFragment);
+        }
     }
 
     @Override
     public void navToLogin() {
-        Navigation.findNavController(requireView()).navigate(R.id.action_splashScreenFragment_to_loginFragment);
-
+        View view = getView();
+        if (isAdded() && view != null) {
+            Navigation.findNavController(view).navigate(R.id.action_splashScreenFragment_to_loginFragment);
+        }
     }
 }
