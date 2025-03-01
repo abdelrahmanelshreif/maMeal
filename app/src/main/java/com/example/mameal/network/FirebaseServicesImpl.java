@@ -2,26 +2,17 @@ package com.example.mameal.network;
 
 import androidx.annotation.NonNull;
 
-import com.example.mameal.authentication.presenter.LoginPresenter;
-import com.example.mameal.authentication.presenter.RegisterPresenter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 public class FirebaseServicesImpl implements FirebaseServices {
 
     private final FirebaseAuth auth;
-
-    LoginPresenter loginPresenter;
-
-    RegisterPresenter registerPresenter;
-
 
     public FirebaseServicesImpl() {
         this.auth = FirebaseAuth.getInstance();
@@ -80,5 +71,9 @@ public class FirebaseServicesImpl implements FirebaseServices {
         }
     }
 
+    @Override
+    public boolean isUserLoggedIn() {
+        return auth.getCurrentUser() != null;
+    }
 
 }

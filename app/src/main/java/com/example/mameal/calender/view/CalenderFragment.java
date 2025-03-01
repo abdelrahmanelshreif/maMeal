@@ -13,11 +13,6 @@ import com.example.mameal.R;
 public class CalenderFragment extends Fragment {
 
 
-    public CalenderFragment() {
-        // Required empty public constructor
-    }
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

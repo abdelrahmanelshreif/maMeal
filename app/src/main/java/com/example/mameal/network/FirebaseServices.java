@@ -10,4 +10,6 @@ public interface FirebaseServices {
 
     void signInWithGoogle(String idToken, AuthenticationCallback callback);
 
+    boolean isUserLoggedIn();
+
 }
