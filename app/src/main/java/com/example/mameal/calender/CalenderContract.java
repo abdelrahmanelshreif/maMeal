@@ -1,16 +1,27 @@
 package com.example.mameal.calender;
 
 import com.example.mameal.model.Event;
+import com.example.mameal.model.Meal;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.annotations.NonNull;
+
 public interface CalenderContract {
     interface View {
-        void showEvents(List<Event> events);
+
         void showError(String message);
+
+        void showMealOfEvent(@NonNull List<Meal> meals);
+
+        void showSuccessDeletion(String message);
     }
 
     interface Presenter {
-        void onDateSelected(String date);
+
+        void getMealsForDate(String selectedDate);
+
+
+        void removeEventFromPlan(String mealId, String mealDate);
     }
 }

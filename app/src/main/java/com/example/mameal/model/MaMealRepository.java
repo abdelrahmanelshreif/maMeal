@@ -39,14 +39,15 @@ public class MaMealRepository {
         return maMealRemoteDataSource.getCategoriesNamesOnly();
     }
 
-    public Single<CategoryDataResponse> getCategories(){
+    public Single<CategoryDataResponse> getCategories() {
         return maMealRemoteDataSource.getCategoriesWithDetails();
     }
 
-    public Single<CountryResponse> getAreas(){
-        return  maMealRemoteDataSource.getAreas();
+    public Single<CountryResponse> getAreas() {
+        return maMealRemoteDataSource.getAreas();
     }
-    public Flowable<IngredientResponse> getIngredients(){
+
+    public Flowable<IngredientResponse> getIngredients() {
         return maMealRemoteDataSource.getIngredients();
     }
 
@@ -74,18 +75,21 @@ public class MaMealRepository {
     public Completable delete(Meal meal) {
         return mealsLocalDataSource.delete(meal);
     }
+
     public Observable<List<Meal>> getFavouriteMeals() {
         return mealsLocalDataSource.getStoredData();
     }
-    public Completable insertEvent(Event event){
+
+    public Completable insertEvent(Event event) {
         return mealsLocalDataSource.insertEvent(event);
     }
-    public Completable deleteEvent(Event event){
-        return mealsLocalDataSource.deleteEvent(event);
+
+    public Completable deleteEvent(String mealId , String mealDate) {
+        return mealsLocalDataSource.deleteEvent(mealId, mealDate);
     }
 
-    public Observable<List<Event>> getEventsByDate(String date){
-        return mealsLocalDataSource.getEventByDate(date);
+    public Single<List<String>> getPlannedMealsAt(String date) {
+        return mealsLocalDataSource.getPlannedMealsAtDay(date);
     }
 
 }

@@ -97,7 +97,7 @@
                             android:layout_weight="1"
                             android:adjustViewBounds="true"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/ic_launcher_background"
+                            android:src="@drawable/default_menu_image_placeholder"
                             android:visibility="visible" />
 
                         <TextView

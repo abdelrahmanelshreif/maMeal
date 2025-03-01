@@ -42,7 +42,7 @@ dependencies {
     implementation(libs.legacy.support.v4)
     implementation(libs.annotation)
 
-    implementation(libs.material.v1110)
+    implementation (libs.material.v190)
     implementation(libs.lottie)
 
     implementation(libs.navigation.fragment)

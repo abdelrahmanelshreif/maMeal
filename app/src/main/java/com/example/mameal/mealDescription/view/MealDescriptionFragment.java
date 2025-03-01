@@ -32,6 +32,7 @@ import com.example.mameal.model.Meal;
 import com.example.mameal.network.MaMealRemoteDataSource;
 import com.example.mameal.shared.Utility;
 import com.google.android.material.chip.Chip;
+import com.google.android.material.datepicker.MaterialDatePicker;
 
 import java.util.List;
 
@@ -40,9 +41,10 @@ public class MealDescriptionFragment extends Fragment implements MealDescription
     private RecyclerView ingredientRecyclerView;
     private ConstraintLayout instructionsLayout;
     private Chip ingredientChip, procedureChip;
-    ImageView addToFav, mealImg;
+    ImageView addToFav, mealImg , addToPlan;
     TextView mealTitle, mealCategory;
     TextView instructions;
+    String mealId;
     private WebView webView;
 
     @Override
@@ -64,10 +66,11 @@ public class MealDescriptionFragment extends Fragment implements MealDescription
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setupUiComponent(view);
-        String mealId = MealDescriptionFragmentArgs.fromBundle(getArguments()).getMealId();
+        mealId = MealDescriptionFragmentArgs.fromBundle(getArguments()).getMealId();
         mealDescriptionPresenter.getMealData(mealId);
         mealDescriptionPresenter.getIngredients(mealId);
         addToFav.setOnClickListener(v -> mealDescriptionPresenter.addToFavourite(mealId));
+        addToPlan.setOnClickListener(v -> mealDescriptionPresenter.showDatePicker(requireActivity().getSupportFragmentManager()));
     }
 
 
@@ -81,6 +84,7 @@ public class MealDescriptionFragment extends Fragment implements MealDescription
         mealTitle = view.findViewById(R.id.mealTitleCardTextViewCard);
         mealCategory = view.findViewById(R.id.mealCategoryCardTextView);
         addToFav = view.findViewById(R.id.mealAddToFavBtn);
+        addToPlan = view.findViewById(R.id.addToCalender);
         instructions = view.findViewById(R.id.textView20);
         ingredientRecyclerView.setVisibility(View.VISIBLE);
         instructionsLayout.setVisibility(View.GONE);
@@ -114,6 +118,17 @@ public class MealDescriptionFragment extends Fragment implements MealDescription
     @Override
     public void showError(String message) {
         Utility.showToast(getContext(), message);
+    }
+
+    @Override
+    public String getCurrentMealId() {
+        return mealId;
+    }
+
+    @Override
+    public void showSucessAddingToPlan(String message) {
+        Utility.showToast(requireContext(),message);
+        addToPlan.setImageResource(R.drawable.add_to_calender_filled);
     }
 
     @Override

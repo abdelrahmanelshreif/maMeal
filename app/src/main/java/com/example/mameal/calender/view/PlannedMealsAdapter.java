@@ -2,6 +2,7 @@ package com.example.mameal.calender.view;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.mameal.R;
+import com.example.mameal.model.Event;
 import com.example.mameal.model.Meal;
 import com.example.mameal.shared.Utility;
 
@@ -26,7 +28,7 @@ public class PlannedMealsAdapter extends RecyclerView.Adapter<PlannedMealsAdapte
     OnPlannedMealClickListener onPlannedMealClickListener;
 
 
-    public PlannedMealsAdapter(Context context, List<Meal> values, OnPlannedMealClickListener onPlannedMealClickListener) {
+    public PlannedMealsAdapter(Context context,List<Meal> values, OnPlannedMealClickListener onPlannedMealClickListener) {
         this.context = context;
         this.values = values;
         this.onPlannedMealClickListener = onPlannedMealClickListener;

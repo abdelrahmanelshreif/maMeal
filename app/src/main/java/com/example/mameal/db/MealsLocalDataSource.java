@@ -9,6 +9,7 @@ import java.util.List;
 
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Single;
 
 public class MealsLocalDataSource {
 
@@ -40,12 +41,13 @@ public class MealsLocalDataSource {
         return eventDAO.insertEvent(event);
     }
 
-    public Completable deleteEvent(Event event) {
-        return eventDAO.deleteEvent(event);
+    public Completable deleteEvent(String mealId , String mealDate) {
+        return eventDAO.deleteEvent(mealId,mealDate);
     }
 
-    public Observable<List<Event>> getEventByDate(String date) {
-        return eventDAO.getEventsByDate(date);
+    public Single<List<String>> getPlannedMealsAtDay(String date) {
+        return eventDAO.getMealsOfDay(date);
     }
+
 }
 

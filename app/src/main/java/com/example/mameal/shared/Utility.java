@@ -13,7 +13,10 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.example.mameal.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class Utility {
@@ -99,6 +102,11 @@ public class Utility {
         String formattedIngredientName = ingredientTitle.replace(" " , "%20");
         return "http://www.themealdb.com/images/ingredients/" + formattedIngredientName + "-Small.png";
 
+    }
+
+    public static String getFormattedDate(long selection) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        return sdf.format(new Date(selection));
     }
 
 }

@@ -1,12 +1,21 @@
 package com.example.mameal.mealDescription.presenter;
 
+
+import androidx.fragment.app.FragmentManager;
+
 import com.example.mameal.mealDescription.model.Ingredient;
 import com.example.mameal.mealDescription.view.MealDescriptionContract;
+import com.example.mameal.model.Event;
 import com.example.mameal.model.MaMealRepository;
 import com.example.mameal.model.Meal;
+import com.example.mameal.shared.Utility;
+import com.google.android.material.datepicker.MaterialDatePicker;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
@@ -83,6 +92,31 @@ public class MealDescriptionPresenter implements MealDescriptionContract.Present
                 );
         compositeDisposable.add(disposable);
     }
+
+    @Override
+    public void showDatePicker(FragmentManager fragmentManager) {
+        MaterialDatePicker<Long> datePicker = MaterialDatePicker.Builder
+                .datePicker()
+                .setTitleText("Select Date")
+                .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+                .build();
+        datePicker.show(fragmentManager, "DATE_PICKER");
+
+        datePicker.addOnPositiveButtonClickListener(selection -> {
+            String selectedDate = Utility.getFormattedDate(selection);
+            addMealToPlan(selectedDate);
+        });
+    }
+
+    private void addMealToPlan(String selectedDate) {
+        String mealId = mealDescriptionView.getCurrentMealId();
+        Disposable disposable = maMealRepository.insertEvent(new Event(selectedDate, mealId))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(() -> mealDescriptionView.showSucessAddingToPlan("Your Meal Success Planned to\n" + selectedDate));
+        compositeDisposable.add(disposable);
+    }
+
 
 
     @Override

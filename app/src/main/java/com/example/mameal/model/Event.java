@@ -8,11 +8,14 @@ public class Event {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
-
-    private String mealName;
-    private String mealId;
     private String eventDate;
+    private String meal;
 
+    public Event(String eventDate, String meal) {
+
+        this.eventDate = eventDate;
+        this.meal = meal;
+    }
 
     public int getId() {
         return id;
@@ -22,27 +25,19 @@ public class Event {
         this.id = id;
     }
 
-    public String getMealName() {
-        return mealName;
-    }
-
-    public void setMealName(String mealName) {
-        this.mealName = mealName;
-    }
-
-    public String getMealId() {
-        return mealId;
-    }
-
-    public void setMealId(String mealId) {
-        this.mealId = mealId;
-    }
-
     public String getEventDate() {
         return eventDate;
     }
 
     public void setEventDate(String eventDate) {
         this.eventDate = eventDate;
+    }
+
+    public String getMeal() {
+        return meal;
+    }
+
+    public void setMeal(String meal) {
+        this.meal = meal;
     }
 }
