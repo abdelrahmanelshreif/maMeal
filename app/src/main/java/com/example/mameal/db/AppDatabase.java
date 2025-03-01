@@ -7,13 +7,15 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.example.mameal.model.Category;
+import com.example.mameal.model.Event;
 import com.example.mameal.model.Meal;
 
-@Database(entities = {Meal.class }, version = 1)
+@Database(entities = {Meal.class , Event.class }, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase instance = null;
 
     public abstract MealDAO getMealDAO();
+    public abstract EventDAO getEventDAO();
 
     public static AppDatabase getInstance(Context context) {
         if (instance == null) {

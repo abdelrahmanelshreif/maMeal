@@ -74,9 +74,18 @@ public class MaMealRepository {
     public Completable delete(Meal meal) {
         return mealsLocalDataSource.delete(meal);
     }
-
     public Observable<List<Meal>> getFavouriteMeals() {
         return mealsLocalDataSource.getStoredData();
+    }
+    public Completable insertEvent(Event event){
+        return mealsLocalDataSource.insertEvent(event);
+    }
+    public Completable deleteEvent(Event event){
+        return mealsLocalDataSource.deleteEvent(event);
+    }
+
+    public Observable<List<Event>> getEventsByDate(String date){
+        return mealsLocalDataSource.getEventByDate(date);
     }
 
 }
