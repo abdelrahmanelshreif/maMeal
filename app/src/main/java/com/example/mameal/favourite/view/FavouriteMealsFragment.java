@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -67,6 +68,8 @@ public class FavouriteMealsFragment extends Fragment implements FavouriteMealsVi
 
     @Override
     public void onClickFavouriteMeal(String mealId) {
+        FavouriteMealsFragmentDirections.ActionFavouriteMealsFragmentToMealDescFragment action = FavouriteMealsFragmentDirections.actionFavouriteMealsFragmentToMealDescFragment(mealId);
+        Navigation.findNavController(requireView()).navigate(action);
 
 
     }

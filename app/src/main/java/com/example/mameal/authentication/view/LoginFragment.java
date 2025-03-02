@@ -72,7 +72,7 @@ public class LoginFragment extends Fragment implements LoginView {
         super.onViewCreated(view, savedInstanceState);
         setupUiComponent(view);
 
-        loginPresenter = new LoginPresenter(this, new FirebaseServicesImpl());
+        loginPresenter = new LoginPresenter(this, new FirebaseServicesImpl(),requireContext());
 
         guest_mode_btn.setOnClickListener(v -> setGuest());
         register_Btn.setOnClickListener(v -> loginPresenter.register());

@@ -21,15 +21,15 @@ public class ProfileFragment extends Fragment implements ProfileView {
     Button btnSignOut;
     Button btnSavedPlans;
     Button btnFavouriteMeals;
-
     ProfilePresenter presenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new ProfilePresenter(this);
+        presenter = new ProfilePresenter(this, requireContext());
 
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,6 +46,7 @@ public class ProfileFragment extends Fragment implements ProfileView {
         btnFavouriteMeals.setOnClickListener(v -> presenter.navToFav());
 
     }
+
     private void setupUiComponent(@NonNull View view) {
         btnSignOut = view.findViewById(R.id.btnSignOut);
         btnSavedPlans = view.findViewById(R.id.btnPlannedMeals);

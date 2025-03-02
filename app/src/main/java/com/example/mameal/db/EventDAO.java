@@ -28,4 +28,10 @@ public interface EventDAO {
 
     @Query("DELETE FROM events WHERE meal = :mealId AND eventDate = :mealDate")
     Completable deleteEvent(String mealId, String mealDate);
+
+    @Query("DELETE FROM events")
+    Completable clearEvents();
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    Completable insertEvents(List<Event> events);
 }

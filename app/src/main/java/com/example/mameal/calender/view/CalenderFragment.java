@@ -10,6 +10,7 @@ import android.widget.CalendarView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -51,12 +52,21 @@ public class CalenderFragment extends Fragment implements CalenderContract.View 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setupUiComponent(view);
+        Calendar calendar = Calendar.getInstance();
+        initializingPlans(calendar);
         calenderAtFragmentCalender.setOnDateChangeListener((view1, year, month, dayOfMonth) -> {
             selectedDate = String.format(Locale.getDefault(), "%04d-%02d-%02d", year, month + 1, dayOfMonth);
             presenter.getMealsForDate(selectedDate);
-
         });
 
+    }
+
+    private void initializingPlans(Calendar calendar) {
+        int year1 = calendar.get(Calendar.YEAR);
+        int month1 = calendar.get(Calendar.MONTH);
+        int dayOfMonth1 = calendar.get(Calendar.DAY_OF_MONTH);
+        selectedDate = String.format(Locale.getDefault(), "%04d-%02d-%02d", year1, month1 + 1, dayOfMonth1);
+        presenter.getMealsForDate(selectedDate);
     }
 
     private void setupUiComponent(@NonNull View view) {
@@ -93,5 +103,11 @@ public class CalenderFragment extends Fragment implements CalenderContract.View 
         } else {
             Log.e("RemoveEvent", "No date selected");
         }
+    }
+
+    @Override
+    public void navigateToMeal(String mealId) {
+        com.example.mameal.calender.view.CalenderFragmentDirections.ActionCalenderFragmentToMealDescFragment action = CalenderFragmentDirections.actionCalenderFragmentToMealDescFragment(mealId);
+        Navigation.findNavController(requireView()).navigate(action);
     }
 }

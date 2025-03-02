@@ -25,4 +25,10 @@ public interface MealDAO {
     @Delete
     Completable deleteMeal(Meal meal);
 
+    @Query("DELETE FROM MEAL_TABLE")
+    Completable clearMeals();
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    Completable insertMeals(List<Meal> meals);
+
 }

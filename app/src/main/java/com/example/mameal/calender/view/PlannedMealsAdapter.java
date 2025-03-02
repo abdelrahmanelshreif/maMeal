@@ -66,6 +66,8 @@ public class PlannedMealsAdapter extends RecyclerView.Adapter<PlannedMealsAdapte
                     }
             );
         });
+
+        holder.mealImage.setOnClickListener(v -> onPlannedMealClickListener.navigateToMeal(meal.getMealId()));
     }
 
     @Override

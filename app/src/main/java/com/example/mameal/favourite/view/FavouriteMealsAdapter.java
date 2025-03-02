@@ -65,6 +65,7 @@ public class FavouriteMealsAdapter extends RecyclerView.Adapter<FavouriteMealsAd
                     }
             );
         });
+        holder.mealImage.setOnClickListener(v -> onClickFavouriteItem.onClickFavouriteMeal(meal.getMealId()));
     }
 
     @Override

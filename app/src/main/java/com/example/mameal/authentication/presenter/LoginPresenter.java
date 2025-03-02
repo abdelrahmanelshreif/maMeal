@@ -1,12 +1,16 @@
 package com.example.mameal.authentication.presenter;
 
+import android.content.Context;
 import android.util.Patterns;
 
 import androidx.navigation.Navigation;
 
 import com.example.mameal.authentication.view.LoginView;
+import com.example.mameal.db.MealsLocalDataSource;
+import com.example.mameal.model.MaMealRepository;
 import com.example.mameal.network.AuthenticationCallback;
 import com.example.mameal.network.FirebaseServices;
+import com.example.mameal.network.MaMealRemoteDataSource;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
@@ -18,10 +22,12 @@ public class LoginPresenter implements AuthenticationCallback {
     private LoginView loginView;
 
     private FirebaseServices firebaseServices;
-
-    public LoginPresenter(LoginView loginView, FirebaseServices firebaseServices) {
+    Context context;
+    public LoginPresenter(LoginView loginView, FirebaseServices firebaseServices, Context context) {
         this.loginView = loginView;
         this.firebaseServices = firebaseServices;
+        this.context = context;
+
     }
 
 
@@ -84,6 +90,8 @@ public class LoginPresenter implements AuthenticationCallback {
     @Override
     public void onSuccess(FirebaseUser user) {
         loginView.showLoginSuccess();
+        MaMealRepository.getInstance(MaMealRemoteDataSource.getInstance(), new MealsLocalDataSource(context))
+                .syncFirestoreDataWithRoom(user.getUid());
     }
 
     @Override
