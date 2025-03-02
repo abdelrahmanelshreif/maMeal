@@ -32,6 +32,7 @@ public class HomeFragment extends Fragment implements HomeView, OnMealClickListe
     private HomePresenter homePresenter;
     private CardView dailyMealCard;
     String dailyMealId;
+    MealByCategoryAdapter adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -88,7 +89,7 @@ public class HomeFragment extends Fragment implements HomeView, OnMealClickListe
     }
 
     private void setupRecyclerView(RecyclerView recyclerView, List<Meal> meals) {
-        MealByCategoryAdapter adapter = new MealByCategoryAdapter(getContext(), meals, this);
+        adapter = new MealByCategoryAdapter(getContext(), meals, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setAdapter(adapter);
     }
@@ -107,7 +108,12 @@ public class HomeFragment extends Fragment implements HomeView, OnMealClickListe
 
     @Override
     public void successAddingToFav(String message) {
-        Utility.showToast(getContext(),message);
+        Utility.showToast(getContext(), message);
+    }
+
+    @Override
+    public void updateFavoriteStatus(String mealId, boolean b) {
+        adapter.updateFavoriteStatus(mealId, b);
     }
 
 
@@ -123,7 +129,7 @@ public class HomeFragment extends Fragment implements HomeView, OnMealClickListe
     }
 
     @Override
-    public void onAddToFav(String mealId) {
-        homePresenter.handleAddToFav(mealId);
+    public void onAddToFav(String mealId, boolean isFavourite) {
+        homePresenter.handleAddToFav(mealId, isFavourite);
     }
 }

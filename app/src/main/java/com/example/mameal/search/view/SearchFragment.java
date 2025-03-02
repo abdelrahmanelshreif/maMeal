@@ -62,10 +62,7 @@ public class SearchFragment extends Fragment implements SearchView, OnFilteredCl
         // The Setup of Filter Chips Should be here After getAllMeals not before..
         setupFilterChips();
         searchTextHolder.addTextChangedListener(getWatcher());
-
-
     }
-
     private void setupFilterChips() {
         for (int i = 0; i < chipGroupFilter.getChildCount(); i++) {
             Chip chip = (Chip) chipGroupFilter.getChildAt(i);

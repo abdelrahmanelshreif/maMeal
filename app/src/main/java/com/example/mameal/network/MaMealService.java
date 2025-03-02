@@ -37,6 +37,8 @@ interface MaMealService {
     @GET("list.php?i=list")
     Flowable<IngredientResponse> getIngredientsData();
 
+    @GET("filter.php?")
+    Single<MealResponse> getMealsFilteredByIngredient(@Query("i") String ingredient);
     @GET("lookup.php")
     Single<MealResponse> getMealById(@Query("i") String mealId);
 

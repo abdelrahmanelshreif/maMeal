@@ -84,6 +84,9 @@ public class MaMealRepository {
     public Single<Meal> getMealById(String id) {
         return maMealRemoteDataSource.getMealbyId(id);
     }
+    public Single<MealResponse> getMealsFilteredByIngredient(String ingredient){
+        return maMealRemoteDataSource.getMealsFilteredByIngredient(ingredient);
+    }
 
     public Completable insert(Meal meal) {
         return mealsLocalDataSource.insert(meal);

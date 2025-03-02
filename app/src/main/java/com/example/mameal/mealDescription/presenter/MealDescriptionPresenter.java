@@ -8,6 +8,8 @@ import com.example.mameal.mealDescription.view.MealDescriptionContract;
 import com.example.mameal.model.Event;
 import com.example.mameal.model.MaMealRepository;
 import com.example.mameal.model.Meal;
+import com.example.mameal.network.FirebaseServices;
+import com.example.mameal.network.FirebaseServicesImpl;
 import com.example.mameal.shared.Utility;
 import com.google.android.material.datepicker.MaterialDatePicker;
 
@@ -28,15 +30,16 @@ public class MealDescriptionPresenter implements MealDescriptionContract.Present
 
     MaMealRepository maMealRepository;
     Ingredient ingredient;
-
     MealDescriptionContract.View mealDescriptionView;
     CompositeDisposable compositeDisposable;
 
+    FirebaseServices firebaseServices;
     public MealDescriptionPresenter(MaMealRepository maMealRepository, Ingredient ingredient, MealDescriptionContract.View view) {
         this.maMealRepository = maMealRepository;
         this.ingredient = ingredient;
         this.mealDescriptionView = view;
         this.compositeDisposable = new CompositeDisposable();
+        this.firebaseServices = new FirebaseServicesImpl();
     }
 
     @Override
@@ -79,6 +82,11 @@ public class MealDescriptionPresenter implements MealDescriptionContract.Present
 
     @Override
     public void addToFavourite(String mealId) {
+        if(!firebaseServices.isUserLoggedIn())
+        {
+            mealDescriptionView.showError("You have to login to use this feature");
+            return;
+        }
         Disposable disposable = maMealRepository.getMealById(mealId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
@@ -95,6 +103,11 @@ public class MealDescriptionPresenter implements MealDescriptionContract.Present
 
     @Override
     public void showDatePicker(FragmentManager fragmentManager) {
+        if(!firebaseServices.isUserLoggedIn())
+        {
+            mealDescriptionView.showError("You have to login to use this feature");
+            return;
+        }
         MaterialDatePicker<Long> datePicker = MaterialDatePicker.Builder
                 .datePicker()
                 .setTitleText("Select Date")
@@ -109,6 +122,12 @@ public class MealDescriptionPresenter implements MealDescriptionContract.Present
     }
 
     private void addMealToPlan(String selectedDate) {
+        if(!firebaseServices.isUserLoggedIn())
+        {
+            mealDescriptionView.showError("You have to login to use this feature");
+        }else{
+            return;
+        }
         String mealId = mealDescriptionView.getCurrentMealId();
         Disposable disposable = maMealRepository.insertEvent(new Event(selectedDate, mealId))
                 .subscribeOn(Schedulers.io())

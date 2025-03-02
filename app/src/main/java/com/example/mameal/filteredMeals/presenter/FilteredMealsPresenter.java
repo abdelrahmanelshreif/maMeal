@@ -8,6 +8,8 @@ import com.example.mameal.model.MealResponse;
 import com.example.mameal.network.MaMealRemoteDataSource;
 import com.example.mameal.search.view.SearchView;
 
+import java.util.List;
+
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -47,33 +49,14 @@ public class FilteredMealsPresenter {
 
     public void getMealsFilteredByIngredients(String ingredient) {
         filterView.showLoading();
-        // getting all meals
-        // then filter it if the ingredients any match with strIngredient
-        // show meals that matches the required ingredient
-        Disposable disposable = repository.getAllMealsData()
+        Disposable disposable = repository.getMealsFilteredByIngredient(ingredient)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(MealResponse::getMeals)
-                .flatMapIterable(meals -> meals)
-                .filter(meal -> {
-
-                    for (String tempIngredient : meal.getIngredients()) {
-                        if (tempIngredient.equals(ingredient))
-                            return true;
-                    }
-                    return false;
-                }).toList()
-                .subscribe(
-
-                        meals -> {
-                            filterView.showMealsFilteredByIngredient(meals);
-                            filterView.hideLoading();
-                        },
-                        throwable -> filterView.showError(throwable.getMessage())
-                );
+                .subscribe(meals -> filterView.showMealsFilteredByIngredient(meals));
         compositeDisposable.add(disposable);
+        filterView.hideLoading();
     }
-
 
 
     public void getMealsFilteredByCountry(String country) {

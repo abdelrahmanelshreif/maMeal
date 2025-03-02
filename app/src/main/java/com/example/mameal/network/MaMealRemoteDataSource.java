@@ -70,6 +70,9 @@ public class MaMealRemoteDataSource {
     public Single<MealResponse> getMealsByCategory(String category) {
         return maMealService.getMealsByCategory(category);
     }
+    public Single<MealResponse> getMealsFilteredByIngredient(String ingredient){
+        return maMealService.getMealsFilteredByIngredient(ingredient);
+    }
 
     public Observable<List<CategoryWithMeals>> getCategoryWithMeals() {
         return maMealService.getCategoriesNames()
