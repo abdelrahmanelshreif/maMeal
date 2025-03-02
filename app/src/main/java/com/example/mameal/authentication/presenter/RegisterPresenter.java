@@ -5,6 +5,7 @@ import android.util.Patterns;
 import com.example.mameal.authentication.view.RegisterView;
 import com.example.mameal.network.AuthenticationCallback;
 import com.example.mameal.network.FirebaseServices;
+import com.google.firebase.auth.FirebaseUser;
 
 public class RegisterPresenter implements AuthenticationCallback {
 
@@ -46,7 +47,7 @@ public class RegisterPresenter implements AuthenticationCallback {
     }
 
     @Override
-    public void onSuccess() {
+    public void onSuccess(FirebaseUser user) {
         registerView.showRegisterSuccess();
     }
 

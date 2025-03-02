@@ -1,19 +1,33 @@
 package com.example.mameal.authentication.presenter;
 
+import android.content.Context;
 import android.util.Patterns;
 
+import androidx.navigation.Navigation;
+
 import com.example.mameal.authentication.view.LoginView;
+import com.example.mameal.db.MealsLocalDataSource;
+import com.example.mameal.model.MaMealRepository;
 import com.example.mameal.network.AuthenticationCallback;
 import com.example.mameal.network.FirebaseServices;
+import com.example.mameal.network.MaMealRemoteDataSource;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseUser;
+
 
 public class LoginPresenter implements AuthenticationCallback {
 
     private LoginView loginView;
-    private FirebaseServices firebaseServices;
 
-    public LoginPresenter(LoginView loginView, FirebaseServices firebaseServices) {
+    private FirebaseServices firebaseServices;
+    Context context;
+    public LoginPresenter(LoginView loginView, FirebaseServices firebaseServices, Context context) {
         this.loginView = loginView;
         this.firebaseServices = firebaseServices;
+        this.context = context;
+
     }
 
 
@@ -39,13 +53,53 @@ public class LoginPresenter implements AuthenticationCallback {
         return true;
     }
 
+    public void initiateGoogleSignIn() {
+        loginView.launchGoogleSignIn();
+    }
+
+    public void handleGoogleSignInResult(Task<GoogleSignInAccount> task)  {
+        GoogleSignInAccount account = null;
+        try {
+            account = task.getResult(ApiException.class);
+        } catch (ApiException e) {
+            loginView.showLoginError("Error At Google Sign in");
+        }
+        if (account == null) {
+            loginView.onGoogleSignInFailure("Google Sign-In failed: Account is null");
+            return;
+        }
+        String idToken = account.getIdToken();
+        if (idToken != null) {
+            firebaseServices.signInWithGoogle(idToken, new AuthenticationCallback() {
+                @Override
+                public void onSuccess(FirebaseUser user) {
+                    loginView.onGoogleSignInSuccess(user);
+                }
+
+                @Override
+                public void onFailure(String errorMessage) {
+                    loginView.onGoogleSignInFailure(errorMessage);
+                }
+            });
+        } else {
+            loginView.onGoogleSignInFailure("Google Sign-In failed: ID token is null");
+        }
+
+    }
+
     @Override
-    public void onSuccess() {
+    public void onSuccess(FirebaseUser user) {
         loginView.showLoginSuccess();
+        MaMealRepository.getInstance(MaMealRemoteDataSource.getInstance(), new MealsLocalDataSource(context))
+                .syncFirestoreDataWithRoom(user.getUid());
     }
 
     @Override
     public void onFailure(String errorMessage) {
         loginView.showLoginError(errorMessage);
+    }
+
+    public void register() {
+        loginView.NavigateRegisterScreen();
     }
 }

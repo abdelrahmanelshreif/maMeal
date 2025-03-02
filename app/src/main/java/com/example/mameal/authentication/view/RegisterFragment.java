@@ -11,11 +11,12 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.example.mameal.R;
 import com.example.mameal.authentication.presenter.RegisterPresenter;
 import com.example.mameal.network.FirebaseServicesImpl;
-import com.example.mameal.utils.Utility;
+import com.example.mameal.shared.Utility;
 
 
 public class RegisterFragment extends Fragment implements RegisterView {
@@ -96,6 +97,7 @@ public class RegisterFragment extends Fragment implements RegisterView {
     @Override
     public void showRegisterSuccess() {
         Utility.showToast(getContext(), "Account has been successfully created");
+        Navigation.findNavController(requireView()).navigate(R.id.action_registerFragment_to_homeFragment);
     }
 
     @Override

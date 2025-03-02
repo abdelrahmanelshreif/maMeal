@@ -1,6 +1,7 @@
 package com.example.mameal.mealDescription.view;
 
 import android.annotation.SuppressLint;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +10,6 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,34 +21,39 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.example.mameal.R;
-import com.example.mameal.mealDescription.model.IngredientWithMeasure;
+import com.example.mameal.db.MealsLocalDataSource;
+import com.example.mameal.mealDescription.model.Ingredient;
 import com.example.mameal.mealDescription.presenter.MealDescriptionPresenter;
 import com.example.mameal.model.MaMealRepository;
+import com.example.mameal.model.Meal;
 import com.example.mameal.network.MaMealRemoteDataSource;
+import com.example.mameal.shared.Utility;
 import com.google.android.material.chip.Chip;
+import com.google.android.material.datepicker.MaterialDatePicker;
 
 import java.util.List;
 
 public class MealDescriptionFragment extends Fragment implements MealDescriptionContract.View {
-    MealDescriptionPresenter mealDescriptionPresenter;
+    MealDescriptionContract.Presenter mealDescriptionPresenter;
     private RecyclerView ingredientRecyclerView;
     private ConstraintLayout instructionsLayout;
     private Chip ingredientChip, procedureChip;
-
-    ImageView addToFav, mealImg;
+    ImageView addToFav, mealImg , addToPlan;
     TextView mealTitle, mealCategory;
-
+    TextView instructions;
+    String mealId;
     private WebView webView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.mealDescriptionPresenter = new MealDescriptionPresenter(
-                MaMealRepository.getInstance(new MaMealRemoteDataSource()),
-                new IngredientWithMeasure()
-        );
+                MaMealRepository.getInstance(MaMealRemoteDataSource.getInstance(), new MealsLocalDataSource(getContext())),
+                new Ingredient(),
+                this);
     }
 
     @Override
@@ -61,61 +66,13 @@ public class MealDescriptionFragment extends Fragment implements MealDescription
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setupUiComponent(view);
-        showIngredients(mealDescriptionPresenter.getIngredients());
-        setupVedioPlayer(view);
-
-        mealTitle.setText("Spicy Arrabiata Penne");
-        mealCategory.setText("Vegetarian");
-        Glide.with(this)
-                .load("https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg")
-                .apply(new RequestOptions()
-                        .override(700,700))
-                .placeholder(R.drawable.default_menu_image_placeholder)
-                .error(R.drawable.default_menu_image_placeholder)
-                .into(mealImg);
-
-
-
-        ingredientChip.setOnClickListener(v -> {
-            ingredientChip.setChipBackgroundColorResource(R.color.white);
-            ingredientChip.setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
-            ingredientChip.setChipBackgroundColorResource(R.color.primary_100);
-
-            procedureChip.setChipBackgroundColorResource(R.color.white);
-            procedureChip.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary_80));
-
-            ingredientRecyclerView.setVisibility(View.VISIBLE);
-            instructionsLayout.setVisibility(View.GONE);
-        });
-
-        procedureChip.setOnClickListener(v -> {
-
-
-            procedureChip.setChipBackgroundColorResource(R.color.primary_100);
-            procedureChip.setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
-
-            ingredientChip.setChipBackgroundColorResource(R.color.white);
-            ingredientChip.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary_80));
-
-            ingredientRecyclerView.setVisibility(View.GONE);
-            instructionsLayout.setVisibility(View.VISIBLE);
-        });
-
-
+        mealId = MealDescriptionFragmentArgs.fromBundle(getArguments()).getMealId();
+        mealDescriptionPresenter.getMealData(mealId);
+        mealDescriptionPresenter.getIngredients(mealId);
+        addToFav.setOnClickListener(v -> mealDescriptionPresenter.addToFavourite(mealId));
+        addToPlan.setOnClickListener(v -> mealDescriptionPresenter.showDatePicker(requireActivity().getSupportFragmentManager()));
     }
 
-    private void setupVedioPlayer(@NonNull View view) {
-        String youtubeUrl = "https://www.youtube.com/embed/VVnZd8A84z4";
-        WebSettings webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        webSettings.setDomStorageEnabled(true);
-        webView.setWebViewClient(new WebViewClient());
-        StringBuilder iframe = new StringBuilder();
-        iframe.append("<html><body><iframe width=\"100%\" height=\"100%\" ")
-                .append("src=\"").append(youtubeUrl).append("\" ")
-                .append("frameborder=\"0\" allowfullscreen></iframe></body></html>");
-        webView.loadData(iframe.toString(), "text/html", "utf-8");
-    }
 
     private void setupUiComponent(@NonNull View view) {
         ingredientRecyclerView = view.findViewById(R.id.ingredientRecyclerView);
@@ -127,16 +84,104 @@ public class MealDescriptionFragment extends Fragment implements MealDescription
         mealTitle = view.findViewById(R.id.mealTitleCardTextViewCard);
         mealCategory = view.findViewById(R.id.mealCategoryCardTextView);
         addToFav = view.findViewById(R.id.mealAddToFavBtn);
+        addToPlan = view.findViewById(R.id.addToCalender);
+        instructions = view.findViewById(R.id.textView20);
         ingredientRecyclerView.setVisibility(View.VISIBLE);
         instructionsLayout.setVisibility(View.GONE);
+        ingredientChip.setOnClickListener(v -> {
+            ingredientChip.setChipBackgroundColorResource(R.color.white);
+            ingredientChip.setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
+            ingredientChip.setChipBackgroundColorResource(R.color.primary_100);
+            procedureChip.setChipBackgroundColorResource(R.color.white);
+            procedureChip.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary_80));
+            ingredientRecyclerView.setVisibility(View.VISIBLE);
+            instructionsLayout.setVisibility(View.GONE);
+        });
+        procedureChip.setOnClickListener(v -> {
+            procedureChip.setChipBackgroundColorResource(R.color.primary_100);
+            procedureChip.setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
+            ingredientChip.setChipBackgroundColorResource(R.color.white);
+            ingredientChip.setTextColor(ContextCompat.getColor(requireContext(), R.color.primary_80));
+            ingredientRecyclerView.setVisibility(View.GONE);
+            instructionsLayout.setVisibility(View.VISIBLE);
+        });
     }
 
     @Override
-    public void showIngredients(List<IngredientWithMeasure> ingredientList) {
+    public void showIngredients(List<Ingredient> ingredientList) {
         IngredientsAdapter ingredientsAdapter = new IngredientsAdapter(getContext(), ingredientList);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         ingredientRecyclerView.setLayoutManager(layoutManager);
         ingredientRecyclerView.setAdapter(ingredientsAdapter);
+    }
+
+    @Override
+    public void showError(String message) {
+        Utility.showToast(getContext(), message);
+    }
+
+    @Override
+    public String getCurrentMealId() {
+        return mealId;
+    }
+
+    @Override
+    public void showSucessAddingToPlan(String message) {
+        Utility.showToast(requireContext(),message);
+        addToPlan.setImageResource(R.drawable.add_to_calender_filled);
+    }
+
+    @Override
+    public void successAddingToFav(String message) {
+        Utility.showToast(getContext(), message);
+        addToFav.setImageResource(R.drawable.filled_fav);
+    }
+
+    @Override
+    public void setMealMainData(Meal meal) {
+        setMealTextData(meal);
+        Utility.loadImage(this, meal.getMealThumb(), mealImg);
+        loadYoutubeVideo(mealDescriptionPresenter.getFormattedYoutubeUrl(meal.getMealYoutube()));
+    }
+
+
+    private void setMealTextData(Meal meal) {
+        mealTitle.setText(meal.getMealTitle());
+        mealCategory.setText(meal.getMealCategory());
+        Glide.with(this)
+                .load(Utility.buildFlagUrl(meal.getMealArea()))
+                .placeholder(R.drawable.default_menu_image_placeholder)
+                .error(R.drawable.default_menu_image_placeholder)
+                .into(new CustomTarget<Drawable>() {
+                    @Override
+                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                        mealCategory.setCompoundDrawablesWithIntrinsicBounds(null, null, null, resource);
+                    }
+
+                    @Override
+                    public void onLoadCleared(@Nullable Drawable placeholder) {
+                        mealCategory.setCompoundDrawablesWithIntrinsicBounds(null, null, null, placeholder);
+                    }
+                });
+
+        instructions.setText(mealDescriptionPresenter.getFormattedInstructions(meal));
+    }
+
+
+    private void loadYoutubeVideo(String youtubeUrl) {
+        setupWebView();
+        String iframe = "<html><body><iframe width=\"100%\" height=\"100%\" " +
+                "src=\"" + youtubeUrl + "\" frameborder=\"0\" allowfullscreen></iframe></body></html>";
+        webView.loadData(iframe, "text/html", "utf-8");
+    }
+
+
+    @SuppressLint("SetJavaScriptEnabled")
+    private void setupWebView() {
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setDomStorageEnabled(true);
+        webView.setWebViewClient(new WebViewClient());
     }
 
 }

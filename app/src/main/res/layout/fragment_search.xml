@@ -1,96 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/general_layout_padding"
-    tools:context=".search.view.SearchFragment" >
+    tools:context=".search.view.SearchFragment">
 
-    <ImageButton
-        android:id="@+id/searchBackimageBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/baseline_arrow_back_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView22"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/search_recipes"
-        android:fontFamily="@font/poppins_semibold"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/searchBackimageBtn"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/searchtextInputEditText"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:hint="@string/search_recipe"
-        android:drawablePadding="@dimen/drawable_start_padding_at_input_fileds"
-        android:drawableStart="@drawable/searchbar"
-        android:textCursorDrawable="@color/grey_4"
-        android:textColorHint="@color/grey_4"
-        android:paddingStart="@dimen/search_padding_Start"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchBackimageBtn" />
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/textView23"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/poppins_semibold"
-        android:text="@string/search_by"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchtextInputEditText" />
-
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipsGroupFilter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:chipSpacing="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView23">
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip"
+        <TextView
+            android:id="@+id/textView22"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/grey_4"
-            android:text="@string/category"/>
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/search_recipes"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip2"
-            android:layout_width="wrap_content"
-            android:backgroundTint="@color/grey_4"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout2"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/country"/>
+            android:layout_marginTop="12dp"
+            android:hint="@string/search_area_text"
+            android:textColorHint="@color/grey_4"
+            app:boxCornerRadiusBottomEnd="16dp"
+            app:boxCornerRadiusBottomStart="16dp"
+            app:boxCornerRadiusTopEnd="16dp"
+            app:boxCornerRadiusTopStart="16dp"
+            app:boxStrokeColor="@color/grey_4"
+            app:boxStrokeWidth="2dp"
+            app:boxStrokeWidthFocused="5dp"
+            app:endIconTint="@color/grey_4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView22">
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip3"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/searchTextHolder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:drawablePadding="8dp"
+                android:paddingLeft="8dp"
+                android:inputType="text"
+                android:drawableStart="@drawable/searchbar"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/textView23"
             android:layout_width="wrap_content"
-            android:backgroundTint="@color/grey_4"
             android:layout_height="wrap_content"
-            android:text="@string/ingredient"/>
-    </com.google.android.material.chip.ChipGroup>
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="@string/search_by"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayout2" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/searchResultRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.347"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chipsGroupFilter" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipsGroupFilter"
+            android:layout_width="wrap_content"
+            android:padding="8dp"
+            android:layout_height="wrap_content"
+            app:singleSelection="true"
+            android:layout_marginTop="16dp"
+            app:chipSpacing="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView23">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip"
+                android:textColor="@color/primary_80"                android:checkable="true"
+                android:focusable="true"
+                style="@style/Widget.Material3.Chip.Filter.Elevated"
+                android:elevation="5dp"
+                app:chipBackgroundColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/category" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip2"
+                android:textColor="@color/primary_80"
+                android:checkable="true"
+                android:focusable="true"
+                app:chipBackgroundColor="@color/white"
+                style="@style/Widget.Material3.Chip.Filter.Elevated"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="5dp"
+                android:text="@string/country" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip3"
+                android:textColor="@color/primary_80"
+                android:focusable="true"
+                android:checkable="true"
+                app:chipBackgroundColor="@color/white"
+                style="@style/Widget.Material3.Chip.Filter.Elevated"
+                android:elevation="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ingredient" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/searchResultRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.Material3.Chip.Filter.Elevated"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chipsGroupFilter" />
+
+        <ProgressBar
+            android:id="@+id/progressBarRecyclerViewSearchFragment"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/searchResultRecyclerView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

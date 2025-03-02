@@ -10,4 +10,15 @@
         <item name="cornerSize">25%</item>
 
     </style>
+
+    <style name="daily_meal_rounded_style">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <style name="CircleImageView" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
 </resources>

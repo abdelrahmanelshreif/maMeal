@@ -65,58 +65,61 @@
                 android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_margin="0dp"
                 android:orientation="horizontal"
-                android:weightSum="1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView14">
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/dailyMealCard"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:clickable="true"
                     android:focusable="true"
-                    app:cardCornerRadius="30dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp"
                     app:cardUseCompatPadding="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bottom_card_gradient"
                         android:orientation="vertical"
-                        android:weightSum="2">
+                        android:padding="12dp">
 
-                        <ImageView
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/dailyMealImage"
+                            app:shapeAppearanceOverlay="@style/daily_meal_rounded_style"
                             android:layout_width="match_parent"
-                            android:layout_height="200dp"
+                            android:layout_height="@dimen/daily_meal_layout_height"
                             android:layout_weight="1"
                             android:adjustViewBounds="true"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/ustsqw1468250014"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/default_menu_image_placeholder"
                             android:visibility="visible" />
 
                         <TextView
+                            android:id="@+id/dailyMealTitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="8dp"
-                            android:layout_weight="1"
+                            android:layout_marginTop="8dp"
                             android:fontFamily="@font/poppins_black_italic"
-                            android:paddingStart="8dp"
                             android:text="@string/meal_title"
-                            android:textSize="20sp" />
+                            android:textColor="#000000"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/daiylMealArea"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="8dp"
-                            android:layout_weight="1"
+                            android:layout_marginTop="4dp"
                             android:fontFamily="@font/poppins_light_italic"
-                            android:paddingStart="8dp"
                             android:text="@string/meal_category"
-                            android:textSize="20sp" />
+                            android:textColor="#555555"
+                            android:textSize="16sp" />
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -124,26 +127,14 @@
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/textView16"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/poppins_black"
-                android:text="@string/a_taste_of_the_season"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/homeRecyclerView1"
+            <LinearLayout
+                android:id="@+id/sectionsLinearLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView16" />
-
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

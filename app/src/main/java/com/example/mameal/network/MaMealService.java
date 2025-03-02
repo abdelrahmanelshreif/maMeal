@@ -1,6 +1,10 @@
 package com.example.mameal.network;
 
 import com.example.mameal.model.Category;
+import com.example.mameal.model.CategoryDataResponse;
+import com.example.mameal.model.CategoryResponse;
+import com.example.mameal.model.CountryResponse;
+import com.example.mameal.model.IngredientResponse;
 import com.example.mameal.model.Meal;
 import com.example.mameal.model.MealResponse;
 
@@ -17,24 +21,31 @@ interface MaMealService {
     Flowable<MealResponse> getAllMeals();
 
     @GET("categories.php")
-    Single<List<Category>> getAllCategories();
+    Single<CategoryDataResponse> getAllCategoriesData();
 
+    @GET("list.php?c")
+    Single<CategoryResponse> getCategoriesNames();
     @GET("random.php")
-    Single<Meal> getRandomMeal();
+    Single<MealResponse> getRandomMeal();
 
     @GET("filter.php")
     Single<MealResponse> getMealsByCategory(@Query("c") String category);
 
-    @GET("filter.php")
-    Single<MealResponse> getMealsByArea(@Query("a") String area);
+    @GET("list.php?a=list")
+    Single<CountryResponse> getAreas();
 
-    @GET("filter.php")
-    Single<MealResponse> getMealsByIngredient(@Query("i") String ingredient);
+    @GET("list.php?i=list")
+    Flowable<IngredientResponse> getIngredientsData();
 
+    @GET("filter.php?")
+    Single<MealResponse> getMealsFilteredByIngredient(@Query("i") String ingredient);
     @GET("lookup.php")
-    Single<Meal> getMealById(@Query("i") String mealId);
+    Single<MealResponse> getMealById(@Query("i") String mealId);
 
     @GET("search.php")
     Single<Meal> getMealByName(@Query("s") String mealName);
+
+
+
 
 }

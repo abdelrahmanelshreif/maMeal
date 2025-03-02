@@ -52,4 +52,23 @@
     <string name="mealInstreuctionSample">STEP 1\nTO MAKE SUSHI ROLLS: Pat out some rice. Lay a nori sheet on the mat, shiny-side down. Dip your hands in the vinegared water, then pat handfuls of rice on top in a 1cm thick layer, leaving the furthest edge from you clear.\n\nSTEP 2\nSpread over some Japanese mayonnaise. Use a spoon to spread out a thin layer of mayonnaise down the middle of the rice.\n\nSTEP 3\nAdd the filling. Get your child to top the mayonnaise with a line of their favourite fillings – here we’ve used tuna and cucumber.\n\nSTEP 4\nRoll it up. Lift the edge of the mat over the rice, applying a little pressure to keep everything in a tight roll.\n\nSTEP 5\nStick down the sides like a stamp. When you get to the edge without any rice, brush with a little water and continue to roll into a tight roll.\n\nSTEP 6\nWrap in cling film. Remove the mat and roll tightly in cling film before a grown-up cuts the sushi into thick slices, then unravel the cling film.\n\nSTEP 7\nTO MAKE PRESSED SUSHI: Layer over some smoked salmon. Line a loaf tin with cling film, then place a thin layer of smoked salmon inside on top of the cling film.\n\nSTEP 8\nCover with rice and press down. Press about 3cm of rice over the fish, fold the cling film over and press down as much as you can, using another tin if you have one.\n\nSTEP 9\nTip it out like a sandcastle. Turn block of sushi onto a chopping board. Get a grown-up to cut into fingers, then remove the cling film.\n\nSTEP 10\nTO MAKE SUSHI BALLS: Choose your topping. Get a small square of cling film and place a topping, like half a prawn or a small piece of smoked salmon, on it. Use damp hands to roll walnut-sized balls of rice and place on the topping.\n\nSTEP 11\nMake into tight balls. Bring the corners of the cling film together and tighten into balls by twisting it up, then unwrap and serve.</string>
     <string name="dummy_ingred_photo">https://www.hhs1.com/hubfs/carrots%20on%20wood-1.jpg</string>
     <string name="youtube">Youtube</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome!"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="splash_logo_desc">maMeal</string>
+    <string name="search_area_text">Search</string>
+    <string name="country_name">Country</string>
+    <string name="category_name">Category</string>
+    <string name="filtered_meals">Filtered Meals</string>
+    <string name="default_web_client_id">139518798108-p6gsgvj9f2gavso8i2it6hev1a7c30fk.apps.googleusercontent.com</string>
+    <string name="your_planned_meals">Your Planned Meals</string>
+    <string name="your_favorite_meals">Your Favorite Meals</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="hello_dear_profile">Hello, Dear!</string>
 </resources>

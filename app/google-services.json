@@ -12,7 +12,12 @@
           "package_name": "com.example.mameal"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "139518798108-p6gsgvj9f2gavso8i2it6hev1a7c30fk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDX1w3VD0Mtx8gagjNmAolRo-EAQx7kT6Y"
@@ -20,7 +25,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "139518798108-p6gsgvj9f2gavso8i2it6hev1a7c30fk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
