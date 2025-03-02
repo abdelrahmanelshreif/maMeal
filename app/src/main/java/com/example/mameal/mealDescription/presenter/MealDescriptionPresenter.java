@@ -122,12 +122,7 @@ public class MealDescriptionPresenter implements MealDescriptionContract.Present
     }
 
     private void addMealToPlan(String selectedDate) {
-        if(!firebaseServices.isUserLoggedIn())
-        {
-            mealDescriptionView.showError("You have to login to use this feature");
-        }else{
-            return;
-        }
+
         String mealId = mealDescriptionView.getCurrentMealId();
         Disposable disposable = maMealRepository.insertEvent(new Event(selectedDate, mealId))
                 .subscribeOn(Schedulers.io())
