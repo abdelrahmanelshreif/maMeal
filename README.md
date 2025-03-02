@@ -43,7 +43,7 @@ maMeal is an Android application that helps users plan their weekly meals. It pr
 ## 🚀 Setup & Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/maMeal.git
+   git clone https://github.com/abdelrahman elshreif/maMeal.git
    ```
 2. Open the project in **Android Studio**.
 3. Sync dependencies using **Gradle**.
