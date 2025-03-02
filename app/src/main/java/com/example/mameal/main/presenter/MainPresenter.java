@@ -45,6 +45,7 @@ public class MainPresenter {
 
         if (isGuestMode() && isRestrictedForGuest(itemId)) {
             view.showToast("Sign in to access this feature!");
+            view.navigateTo(R.id.loginFragment); // Navigate to login fragment
             return;
         }
 

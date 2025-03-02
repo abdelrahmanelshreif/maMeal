@@ -38,7 +38,6 @@ public class MealByCategoryAdapter extends RecyclerView.Adapter<MealByCategoryAd
 
     @Override
     public void onBindViewHolder(@NonNull MealByCategoryAdapter.ViewHolder holder, int position) {
-
         Meal meal = values.get(position);
         holder.mealTitle.setText(meal.getMealTitle());
         Glide.with(context)
@@ -48,9 +47,9 @@ public class MealByCategoryAdapter extends RecyclerView.Adapter<MealByCategoryAd
                 .into(holder.mealImage);
         holder.mealImage.setOnClickListener(v -> onMealClickListener.onClick(v, meal.getMealId()));
         holder.mealAddToFav.setOnClickListener(v -> {
-            onMealClickListener.onAddToFav(meal.getMealId(), true);
-
+            onMealClickListener.onAddToFav(meal.getMealId());
         });
+
     }
 
     @Override
@@ -58,16 +57,8 @@ public class MealByCategoryAdapter extends RecyclerView.Adapter<MealByCategoryAd
         return values.size();
     }
 
-    public void updateFavoriteStatus(String mealId, boolean isFavorite) {
-        for (int i = 0; i < values.size(); i++) {
-            if (values.get(i).getMealId().equals(mealId)) {
-                notifyItemChanged(i, isFavorite);
-                break;
-            }
-        }
-    }
 
-    public void updateFavoriteIcon(ImageView imageView, boolean isFavorite) {
+    private void updateFavoriteIcon(ImageView imageView, boolean isFavorite) {
         if (isFavorite) {
             imageView.setImageResource(R.drawable.filled_fav);
         } else {

@@ -21,9 +21,8 @@ public class HomePresenter {
     MaMealRepository maMealRepository;
     HomeView homeView;
 
-    FirebaseServices firebaseServices;
     private CompositeDisposable compositeDisposable;
-
+    FirebaseServices firebaseServices;
 
     public HomePresenter(HomeView homeView, Context context) {
         this.homeView = homeView;
@@ -70,36 +69,22 @@ public class HomePresenter {
 
     }
 
-    public void handleAddToFav(String mealId, boolean isFavourite) {
-        if (!firebaseServices.isUserLoggedIn()) {
-            homeView.showError("You have to login to use this feature");
+    public void handleAddToFav(String mealId) {
+        if (!firebaseServices.isUserLoggedIn()){
+            homeView.showError("You Should Log in to access this feature");
             return;
         }
-
         Disposable disposable = maMealRepository.getMealById(mealId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
                 .subscribe(
-                        meal -> {
-                            if (isFavourite) {
-                                maMealRepository.delete(meal)
-                                        .subscribeOn(Schedulers.io())
-                                        .observeOn(AndroidSchedulers.mainThread())
-                                        .subscribe(() -> {
-                                            homeView.successAddingToFav("Successfully removed from favourites");
-                                            homeView.updateFavoriteStatus(mealId, false);
-                                        }, throwable -> homeView.showError("Error removing from favourites")).dispose();
-                            } else {
-                                maMealRepository.insert(meal)
-                                        .subscribeOn(Schedulers.io())
-                                        .observeOn(AndroidSchedulers.mainThread())
-                                        .subscribe(() -> {
-                                            homeView.successAddingToFav("Successfully added to favourites");
-                                            homeView.updateFavoriteStatus(mealId, true);
-                                        }, throwable -> homeView.showError("Error adding to favourites")).dispose();
-                            }
-                        },
-                        throwable -> homeView.showError("Meal not found")
+                        meal -> maMealRepository.insert(meal)
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(() -> homeView.successAddingToFav("Successfully added to favourite")
+                                        , throwable -> homeView.showError("Error at Adding to Favourite")
+                                )
                 );
+        compositeDisposable.add(disposable);
     }
 }
