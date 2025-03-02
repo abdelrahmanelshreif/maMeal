@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.mameal.R;
-import com.example.mameal.model.Event;
 import com.example.mameal.model.Meal;
 import com.example.mameal.shared.Utility;
 

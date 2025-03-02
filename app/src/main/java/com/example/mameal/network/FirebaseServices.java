@@ -9,6 +9,7 @@ public interface FirebaseServices {
     void register(String email, String password, AuthenticationCallback authenticationCallback);
 
     void signInWithGoogle(String idToken, AuthenticationCallback callback);
+    void signOut(AuthenticationCallback callback);
 
     boolean isUserLoggedIn();
 

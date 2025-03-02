@@ -85,6 +85,9 @@
         <action
             android:id="@+id/action_profileFragment_to_calenderFragment"
             app:destination="@id/calenderFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_favouriteMealsFragment"
+            app:destination="@id/favouriteMealsFragment" />
     </fragment>
     <fragment
         android:id="@+id/calenderFragment"
@@ -126,6 +129,7 @@
     </fragment>
     <fragment
         android:id="@+id/networkFailureFragment"
-        android:name="com.example.mameal.NetworkFailureFragment"
-        android:label="NetworkFailureFragment" />
+        android:name="com.example.mameal.shared.NetworkFailureFragment"
+        android:label="fragment_network_failure"
+        tools:layout="@layout/fragment_network_failure" />
 </navigation>

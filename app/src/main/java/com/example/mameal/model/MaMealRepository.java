@@ -1,27 +1,38 @@
 package com.example.mameal.model;
 
+import android.util.Log;
+
 import com.example.mameal.db.MealsLocalDataSource;
 import com.example.mameal.home.model.CategoryWithMeals;
 import com.example.mameal.network.MaMealRemoteDataSource;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
+import java.util.concurrent.Executors;
 
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class MaMealRepository {
 
     MaMealRemoteDataSource maMealRemoteDataSource;
     MealsLocalDataSource mealsLocalDataSource;
-
-
+    private FirebaseFirestore firebaseFirestore;
     private static MaMealRepository repo = null;
+    CollectionReference mealCollection;
+    CollectionReference eventsCollection;
 
     private MaMealRepository(MaMealRemoteDataSource remoteSrc, MealsLocalDataSource localSrc) {
         this.maMealRemoteDataSource = remoteSrc;
         this.mealsLocalDataSource = localSrc;
+        this.firebaseFirestore = FirebaseFirestore.getInstance();
+        this.mealCollection = firebaseFirestore.collection("favourite_meals_collection");
+        this.eventsCollection = firebaseFirestore.collection("meal_plan");
     }
 
     public static MaMealRepository getInstance(MaMealRemoteDataSource maMealRemoteDataSource, MealsLocalDataSource mealsLocalDataSource) {
@@ -84,7 +95,7 @@ public class MaMealRepository {
         return mealsLocalDataSource.insertEvent(event);
     }
 
-    public Completable deleteEvent(String mealId , String mealDate) {
+    public Completable deleteEvent(String mealId, String mealDate) {
         return mealsLocalDataSource.deleteEvent(mealId, mealDate);
     }
 
@@ -92,4 +103,36 @@ public class MaMealRepository {
         return mealsLocalDataSource.getPlannedMealsAtDay(date);
     }
 
+    public void uploadMealsToFirebase() {
+        Disposable disposable = mealsLocalDataSource.getStoredData()
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .subscribe(
+                        meals -> {
+                            Executors.newSingleThreadExecutor().execute(() -> {
+                                for (Meal meal : meals) {
+                                    mealCollection.document(meal.getMealId()).set(meal);
+                                }
+                            });
+                        }, throwable -> {
+                            Log.e("FirebaseSync", "Error uploading meals", throwable);
+
+                        }
+                );
+    }
+
+    public void uploadEventsToFirebase() {
+        Disposable disposable = mealsLocalDataSource.getAllEvents()
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .subscribe(events -> {
+                    Log.d("DatabaseDebug", "Fetched events: " + events.size());
+                    for (Event event : events) {
+                        Log.d("DatabaseDebug", "Event ID: " + event.getId() + ", Name: " + event.getMeal());
+                        eventsCollection.document(String.valueOf(event.getId())).set(event);
+                    }
+                }, throwable -> {
+                    Log.e("DatabaseDebug", "Error fetching events", throwable);
+                });
+    }
 }

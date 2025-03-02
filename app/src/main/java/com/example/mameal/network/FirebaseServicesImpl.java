@@ -9,13 +9,16 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class FirebaseServicesImpl implements FirebaseServices {
 
     private final FirebaseAuth auth;
+    private final FirebaseFirestore firebaseFirestore;
 
     public FirebaseServicesImpl() {
         this.auth = FirebaseAuth.getInstance();
+        this.firebaseFirestore = FirebaseFirestore.getInstance();
     }
 
     @Override
@@ -68,6 +71,16 @@ public class FirebaseServicesImpl implements FirebaseServices {
                     });
         } catch (Exception e) {
             callback.onFailure("Error creating credential: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public void signOut(AuthenticationCallback callback) {
+        auth.signOut();
+        if (auth.getCurrentUser() == null) {
+            callback.onSuccess(null);
+        } else {
+            callback.onFailure("Sign out failed");
         }
     }
 
